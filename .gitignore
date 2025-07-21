@@ -1,0 +1,35 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# Application Data
+/data/
+
+# Dependencies
+/node_modules
+/src-tauri/target
+
+# Build Artifacts
+/dist
+/dist-ssr
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+/src-tauri/logs/
+
+# IDE / Editor
+.idea
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS
+.DS_Store
+Thumbs.db

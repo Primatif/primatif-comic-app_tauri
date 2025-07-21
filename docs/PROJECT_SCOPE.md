@@ -59,6 +59,8 @@ To create a professional-grade comic creation tool that empowers artists with:
 
 ## Supporting Technologies
 
+> **Note**: The following technology suggestions are recommendations based on current best practices and project requirements. These are not rigid constraints - if better alternatives are discovered during development that provide superior functionality, performance, or developer experience for our specific use case, they should be evaluated and adopted instead. The goal is to build the best possible application, not to adhere strictly to predetermined technology choices.
+
 ### Frontend Enhancements
 - **@kobalte/core**: Unstyled, accessible UI primitives for SolidJS
 - **solid-icons**: Icon library with tree-shaking support
