@@ -43,7 +43,11 @@ These standards build upon the general principles defined in `/.gemini/standards
 - **Composition**: Use type composition (`&` and `|`) to build complex types from simpler ones.
 - **TSDoc**: Document all exported components, interfaces, and types using TSDoc format for clarity and auto-generated documentation.
 
-## 4. HTML & Accessibility
+## 4. Styling
+
+For detailed guidelines on managing styling, including the use of design tokens, global theming, and component-specific styling, refer to the [Styling Standards](styling/GEMINI.md) document.
+
+## 5. HTML & Accessibility
 
 - **Semantic HTML**: Use semantic HTML5 elements (`<article>`, `<nav>`, `<section>`, etc.) to structure the UI.
 - **Element Identification**: All interactive or key elements must have a unique `id` and a corresponding `data-testid` for testing.
