@@ -9,6 +9,7 @@
 - [ ] Initialize a new Tauri project using `create-tauri-app` with SolidJS (frontend) and Rust (backend), adhering to the project's core technology stack.
 - [ ] Select the appropriate SolidJS UI template (e.g., `solid-ts`) to ensure a reactive and type-safe frontend foundation.
 - [ ] Verify the basic Tauri application runs and compiles successfully, confirming the cross-platform desktop framework is operational.
+- [ ] Configure `tauri.conf.json` with the application's bundle identifier (e.g., `com.primatif.comic-panel-creator`), initial window title, and other essential metadata to establish a stable application identity for signing and updates.
 - [ ] Set up basic project structure for frontend and backend as per `PROJECT_SCOPE.md` guidelines, establishing a modular and layered architecture:
   - Frontend (`src/`):
     - `components/` (for UI components, promoting reusability and single responsibility)
@@ -43,6 +44,7 @@
   - Retrieve the message from the database,
     demonstrating the backend's ability to serve data
     to the frontend.
+- [ ] Implement a basic, serializable `Result` type in Rust to ensure the frontend can clearly distinguish between successful data retrieval and potential backend errors during the `invoke` call.
 
 ## 3. Frontend Display (SolidJS)
 
@@ -62,6 +64,7 @@
 - [ ] **Jobs**:
   - [ ] **Lint & Format**: Run `eslint`, `prettier`, and `cargo fmt --check` to enforce code style.
   - [ ] **Build & Test**: Run `npm install`, `npm run test` (if tests exist), and `cargo check` to ensure the application builds and passes basic checks.
+  - [ ] **Caching**: Add steps to cache `node_modules` and `cargo` build directories to optimize workflow speed.
 
 ### `main-branch.yml`
 
@@ -76,4 +79,31 @@
     - [ ] The action will automatically create a GitHub Release, using the version number from your `tauri.conf.json` to tag the release.
     - [ ] The compiled application bundles (e.g., `.app`, `.exe`, `.deb`) will be automatically uploaded to the GitHub Release as artifacts, making them available for download.
     - [ ] **Code Signing (for the proof-of-concept)**: While full, production-grade code signing can be complex, we can set up basic signing for the proof-of-concept. This will involve creating secrets in your GitHub repository to store signing keys and passwords, which will be used by the `tauri-action` during the build process. This is a critical step for user trust and avoiding OS warnings.
+    - [ ] **Secrets & Permissions**: Proactively create placeholders for required secrets (`TAURI_SIGNING_PRIVATE_KEY`, etc.) in the GitHub repository settings and ensure the workflow has the necessary `contents: write` permissions to prevent CI/CD failures.
     - [ ] **Future Distribution**: The workflow will be designed with modularity in mind. While the initial setup will publish artifacts only to GitHub Releases, a separate, subsequent job can be easily added in the future to download these artifacts and upload them to a GCP bucket for website distribution. This ensures the pipeline is extensible for future needs.
+
+## 5. Centralized & Structured Logging Setup (Tauri Best Practice)
+
+- [ ] **Core Solution**: Utilize the official `tauri-plugin-log` for unified logging across frontend and backend, handling file management and rotation.
+- [ ] **Structured Format (JSON)**: All log entries will be written as structured JSON objects to ensure they are machine-parsable for future analysis and consumption. This will be achieved by:
+  - [ ] **Backend (Rust)**: Integrating a structured logging crate (e.g., `structured_logger`) to format Rust logs as JSON before they are processed by `tauri-plugin-log`.
+  - [ ] **Frontend (SolidJS)**: Using the `tauri-plugin-log` JavaScript API to send logs, ensuring JSON objects are stringified before transmission.
+  - The schema will include: `timestamp`, `level`, `source` (e.g., "FRONTEND", "BACKEND", "TAURI"), `message`, and an optional `payload` for additional structured context.
+- [ ] **Rolling Mechanism**: `tauri-plugin-log` will be configured to automatically manage log file rotation (e.g., every 10MB, keeping the last 5 files) to prevent indefinite growth.
+- [ ] **Error & Exception Logging**: `WARN` and `ERROR` level events, including panics and unhandled exceptions, will be logged unconditionally, regardless of the debug mode.
+- [ ] **Debug Mode Distinction (Hybrid Approach)**:
+  - [ ] **Primary Indicators (Compile-Time Safety)**:
+    - **Rust Backend**: Leverage `#[cfg(debug_assertions)]` (automatically set by `tauri dev`) to include/exclude sensitive debug-only code from production builds.
+    - **SolidJS Frontend**: Utilize `import.meta.env.DEV` (set by Vite) to control development-specific behaviors.
+  - [ ] **Secondary Indicator (Runtime Flexibility)**:
+    - **`DEBUG_MODE` Environment Variable**: Read from `.env` (e.g., `DEBUG_MODE=true/false`). This variable will primarily control the *verbosity* of logging and output destinations (console vs. file) *within* a development build.
+- [ ] **Logging Behavior based on Mode**:
+  - [ ] **If `#[cfg(debug_assertions)]` (Rust) OR `import.meta.env.DEV` (SolidJS) is `true` (Development Build)**:
+    - **Log Level**: Determined by `DEBUG_MODE` (e.g., `DEBUG` if `DEBUG_MODE=true`, `INFO` if `DEBUG_MODE=false`).
+    - **Content**: If `DEBUG_MODE=true`, captures verbose, developer-centric information (e.g., environment variables, detailed traces). If `DEBUG_MODE=false`, captures key lifecycle events.
+    - **Destination**: Logs are written to **both** the console (human-readable) and the rolling JSON file.
+  - [ ] **If `#[cfg(debug_assertions)]` (Rust) AND `import.meta.env.PROD` (SolidJS) is `true` (Production Build)**:
+    - **Log Level**: `INFO` (or higher, e.g., `WARN`).
+    - **Content**: Captures key, contextually important lifecycle and business logic events. It will **not** log sensitive developer data, as such code will not be compiled in.
+    - **Destination**: Logs are written **only** to the rolling JSON file.
+- [ ] **Tauri Integration**: Ensure `tauri-plugin-log` is properly initialized in `main.rs` and configured to capture logs from the entire Tauri application (frontend, backend, and framework internals).
