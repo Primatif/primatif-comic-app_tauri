@@ -1,3 +1,5 @@
+2025-07-23 01:03 | Project Relaunch and V1 Development | This project has been relaunched in a new repository with a new technology stack (Tauri, Rust, SolidJS) to move from a prototype to a production-grade application. The goals for this new version are defined in the PROJECT_SCOPE.md document. This marks the official start of Version 1 development.
+
 2025-03-24 03:46 | Modularize script generation components | Separated script generation functionality into dedicated components to improve code organization and maintainability. This makes it easier to extend AI script generation features in the future.
 
 2025-03-24 03:49 | Relocate the instructions modal | Moved the instructions modal to its own directory for better code organization and to follow the component-based architecture pattern.
