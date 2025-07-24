@@ -23,7 +23,6 @@ pnpm-debug.log*
 
 # IDE / Editor
 .idea
-.vscode/
 *.suo
 *.ntvs*
 *.njsproj

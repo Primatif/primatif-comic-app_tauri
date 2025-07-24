@@ -8,20 +8,25 @@
 
 **Intent:** To create a clean, stable foundation for the project, ensuring all tools and configurations are in place before writing application-specific code.
 
-- [ ] **Initialize Tauri Project**:
-  - **Action**: Use `create-tauri-app` to generate the project with the `solid-ts` template.
-  - **Reasoning**: This establishes the core SolidJS (frontend) and Rust (backend) structure, aligning with the project's technology stack.
+- [x] **Initialize Tauri Project**:
+  - **Action**: Used `create-tauri-app` to generate the project with the `solid-ts` template.
+  - **Notes**: This established the core SolidJS (frontend) and Rust (backend) structure, aligning with the project's technology stack. The initial setup included:
+    - **VS Code Extensions**: Rust Analyzer, Tauri, ESLint, Prettier, Tailwind CSS IntelliSense, Solid.js Devtools, GitLens.
+    - **Rust Tooling**: `cargo-watch`, `cargo-deny` (installed via `cargo install`).
+    - **Frontend Tooling**: Vitest (installed as dev dependency via `bun add -D vitest`).
+    - **Package Manager**: Bun (already installed and configured).
+  - **Reasoning**: This creates a clean, stable foundation for the project, ensuring all tools and configurations are in place before writing application-specific code.
 
-- [ ] **Initial Configuration**:
-  - **Action**: Configure `tauri.conf.json` with the bundle identifier (`com.primatif.comic-panel-creator`), window title, and other metadata.
+- [x] **Initial Configuration**:
+  - **Action**: Configured `tauri.conf.json` with the bundle identifier (`com.primatif.comic-panel-creator`), window title, and other metadata.
   - **Reasoning**: This gives the application a stable identity, which is crucial for the operating system, code signing, and future updates.
 
-- [ ] **Version Control**:
-  - **Action**: Perform the initial Git commit.
+- [x] **Version Control**:
+  - **Action**: Performed the initial Git commit.
   - **Reasoning**: This creates a clean baseline, allowing us to track all subsequent changes effectively.
 
-- [ ] **Local Scripts**:
-  - **Action**: Add a `format:md` script to the `package.json` for formatting Markdown files with Prettier.
+- [x] **Local Scripts**:
+  - **Action**: Added a `format:md` script to the `package.json` for formatting Markdown files with Prettier.
   - **Reasoning**: This provides a convenient, local-only tool for maintaining documentation consistency without impacting the CI/CD pipeline.
 
 ---
