@@ -34,6 +34,7 @@
     - `services/` (for backend business logic, orchestrating data and operations)
     - `config.rs` (for environment configuration, externalizing settings for different environments).
 - [ ] Perform an initial Git commit of the scaffolded project, establishing a clean baseline for version control.
+- [ ] **Local Scripts**: Add a `format:md` script to the `package.json` that uses Prettier to format all Markdown files (`.md`) in the project. This script is for local convenience and will not be part of the CI/CD pipeline.
 
 ## 3. Database Integration (Rust Backend)
 
@@ -87,7 +88,7 @@
   - [ ] **Validation**: Run the same linting, formatting, and testing jobs as the `dev-branch.yml` workflow to ensure code quality before a release.
   - [ ] **Release with `tauri-action`**: This is the core of the release process.
     - [ ] Use the official `tauri-apps/tauri-action` to build the application.
-    - [ ] The action will be configured to build for the `macos-latest` runner, as macOS is the only target platform required at this stage.
+    - [ ] The action will be configured with a build matrix to target both `macos-latest` and `ubuntu-latest` runners.
     - [ ] The action will automatically create a GitHub Release, using the version number from your `tauri.conf.json` to tag the release.
     - [ ] The compiled application bundles (e.g., `.app`, `.exe`, `.deb`) will be automatically uploaded to the GitHub Release as artifacts, making them available for download.
     - [ ] **Code Signing (for the proof-of-concept)**: While full, production-grade code signing can be complex, we can set up basic signing for the proof-of-concept. This will involve creating secrets in your GitHub repository to store signing keys and passwords, which will be used by the `tauri-action` during the build process. This is a critical step for user trust and avoiding OS warnings.
@@ -119,3 +120,9 @@
     - **Content**: Captures key, contextually important lifecycle and business logic events. It will **not** log sensitive developer data, as such code will not be compiled in.
     - **Destination**: Logs are written **only** to the rolling JSON file.
 - [ ] **Tauri Integration**: Ensure `tauri-plugin-log` is properly initialized in `main.rs` and configured to capture logs from the entire Tauri application (frontend, backend, and framework internals).
+- [ ] **Initial Implementation & Verification**:
+  - [ ] **Backend**: Add an `info!` log to the `main.rs` setup function to confirm the application is starting and the logger is initialized (e.g., "Logger initialized, application starting up.").
+  - [ ] **Backend**: Add an `info!` log inside the `update_message` Tauri command to record when the authoritative state is being updated.
+  - [ ] **Frontend**: Add a `debug!` log inside the `onMouseMove` event handler for the draggable element, logging the element's real-time coordinates. This will test high-frequency logging in debug mode.
+  - [ ] **Frontend**: Add an `info!` log inside the `onMouseUp` event handler, logging the final coordinates being sent to the backend.
+  - [ ] **Acceptance Criteria**: During development (`tauri dev`), all four log messages must appear correctly in the console and be written to the rolling log file in the specified structured JSON format.
