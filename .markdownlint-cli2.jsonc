@@ -1,0 +1,12 @@
+{
+  // Configuration for markdownlint-cli2 (supports ignores)
+  "config": {
+    "default": true,
+    "MD013": false,
+    "MD033": false,
+    "MD041": false
+  },
+  "ignores": [
+    "docs/PROJECT_SCOPE.md"
+  ]
+}
