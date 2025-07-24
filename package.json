@@ -9,7 +9,8 @@
     "dev": "tauri dev",
     "build": "vite build",
     "serve": "vite preview",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "format:md": "prettier --write \"docs/**/*.md\""
   },
   "license": "PolyForm Strict License 1.0.0",
   "dependencies": {
