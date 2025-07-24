@@ -40,8 +40,8 @@
 
 - [ ] **Create Initial Tauri Commands**:
   - **Action**: Implement two commands:
-    1.  `get_message`: Retrieves the current message from the database.
-    2.  `update_message`: Accepts a string from the frontend and saves it to the database.
+    1. `get_message`: Retrieves the current message from the database.
+    2. `update_message`: Accepts a string from the frontend and saves it to the database.
   - **Reasoning**: These commands form the initial "View-Agnostic API." They are the stable contract the frontend will use, ensuring a clear separation of concerns.
 
 ---
