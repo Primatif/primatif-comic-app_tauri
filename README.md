@@ -27,7 +27,7 @@ pnpm tauri build
 
 - Node.js (v18+)
 - Rust (latest stable)
-- pnpm or npm
+- Bun
 
 ## Documentation
 

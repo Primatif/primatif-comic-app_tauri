@@ -659,7 +659,7 @@ inputs:
 
 - **Code Editor**: VS Code with project-specific extensions
 - **Version Control**: Git with conventional commit messages
-- **Package Management**: npm with lockfile enforcement
+- **Package Management**: Bun with lockfile enforcement
 - **Build Tools**: Vite for frontend, Tauri for desktop packaging
 
 ## Coding Conventions & Architecture Standards
