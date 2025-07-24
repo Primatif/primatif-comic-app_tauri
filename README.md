@@ -14,13 +14,13 @@ A desktop application for comic artists and creators. Digital workspace for visu
 # Clone and install
 git clone https://github.com/Primatif/primatif-comic-app_tauri.git
 cd primatif-comic-app_tauri
-pnpm install
+bun install
 
 # Start development
-pnpm tauri dev
+bun run tauri dev
 
 # Build for production
-pnpm tauri build
+bun run tauri build
 ```
 
 ## Requirements
