@@ -1,3 +1,5 @@
+<!-- Ignore this file for markdown lint -->
+
 # Comic Panel Creator - Project Scope Document
 
 ## Project Overview
