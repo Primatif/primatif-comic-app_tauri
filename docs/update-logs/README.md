@@ -10,6 +10,7 @@ This directory contains an archive of social media posts related to the Comic Pa
 ## Post Format
 
 Each markdown file contains posts from a specific month, with each post:
+
 - Dated with a clear heading
 - Contained within a code block for easy copying
 - Including all original formatting, emojis, and hashtags
@@ -17,6 +18,7 @@ Each markdown file contains posts from a specific month, with each post:
 ## Purpose
 
 This archive serves several purposes:
+
 1. **Historical Reference** - Track how the project has been communicated over time
 2. **Consistency** - Maintain a consistent voice and messaging
 3. **Content Reuse** - Easily reference and adapt previous content for new posts
@@ -25,6 +27,7 @@ This archive serves several purposes:
 ## Usage
 
 When creating new social media content:
+
 1. Reference previous posts to maintain consistency
 2. Add new posts to the appropriate monthly file
 3. Use the established format with code blocks for easy copying

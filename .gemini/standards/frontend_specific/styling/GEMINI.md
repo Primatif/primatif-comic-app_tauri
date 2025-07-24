@@ -21,48 +21,48 @@ All styling values that are intended for reuse across the application (e.g., col
 
 - **`tailwind.config.js`**: Extend Tailwind's default configuration to define custom colors, fonts, spacing, and other design tokens. This allows these values to be used directly as Tailwind utility classes.
 
-    ```javascript
-    // tailwind.config.js
-    module.exports = {
-      theme: {
-        extend: {
-          colors: {
-            primary: {
-              DEFAULT: 'var(--color-primary)',
-              50: 'var(--color-primary-50)',
-              // ...
-            },
-            secondary: 'var(--color-secondary)',
+  ```javascript
+  // tailwind.config.js
+  module.exports = {
+    theme: {
+      extend: {
+        colors: {
+          primary: {
+            DEFAULT: "var(--color-primary)",
+            50: "var(--color-primary-50)",
             // ...
           },
-          spacing: {
-            'layout-xs': '1rem',
-            'layout-sm': '2rem',
-            // ...
-          },
-          // ... other tokens like fontSize, borderRadius, boxShadow
+          secondary: "var(--color-secondary)",
+          // ...
         },
+        spacing: {
+          "layout-xs": "1rem",
+          "layout-sm": "2rem",
+          // ...
+        },
+        // ... other tokens like fontSize, borderRadius, boxShadow
       },
-    };
-    ```
+    },
+  };
+  ```
 
 - **CSS Variables (Optional but Recommended for Theming)**: For dynamic theming (e.g., light/dark mode), define these tokens as CSS custom properties (variables) in a global stylesheet (e.g., `src/index.css`). These CSS variables can then be referenced in `tailwind.config.js`.
 
-    ```css
-    /* src/index.css */
-    :root {
-      --color-primary: #007bff;
-      --color-primary-50: #e6f2ff;
-      --color-secondary: #6c757d;
-      /* ... other global tokens */
-    }
+  ```css
+  /* src/index.css */
+  :root {
+    --color-primary: #007bff;
+    --color-primary-50: #e6f2ff;
+    --color-secondary: #6c757d;
+    /* ... other global tokens */
+  }
 
-    .dark {
-      --color-primary: #66b3ff;
-      --color-primary-50: #001a33;
-      /* ... dark mode tokens */
-    }
-    ```
+  .dark {
+    --color-primary: #66b3ff;
+    --color-primary-50: #001a33;
+    /* ... dark mode tokens */
+  }
+  ```
 
 ## 2. Global Styling and Theming
 

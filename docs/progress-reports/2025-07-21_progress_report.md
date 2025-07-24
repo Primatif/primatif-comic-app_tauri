@@ -17,10 +17,10 @@ The initial foundational phase of the "Comic Panel Creator" application is compl
 2.  **Comprehensive Project Scope Definition**: A detailed `PROJECT_SCOPE.md` document has been created. This document outlines the project's vision, goals, and technical architecture, including the use of SolidJS, TypeScript, and Tailwind CSS for the frontend, and Tauri with Rust and SQLite for the backend.
 
 3.  **Establishment of Development Standards**: A full suite of development standards has been established and documented within the `.gemini` directory. This includes:
-    *   **Branching and CI/CD Strategy**: A clear process for managing code, from feature development to production releases.
-    *   **Commit Message Style Guide**: A standardized format for commit messages to ensure a clean and understandable version history.
-    *   **Frontend and Backend Architectural Guidelines**: Specific standards for building components, managing state, and handling data, tailored to our chosen technology stack.
-    *   **General Principles**: A high-level set of architectural and development principles that ensure consistency and quality across the entire codebase.
+    - **Branching and CI/CD Strategy**: A clear process for managing code, from feature development to production releases.
+    - **Commit Message Style Guide**: A standardized format for commit messages to ensure a clean and understandable version history.
+    - **Frontend and Backend Architectural Guidelines**: Specific standards for building components, managing state, and handling data, tailored to our chosen technology stack.
+    - **General Principles**: A high-level set of architectural and development principles that ensure consistency and quality across the entire codebase.
 
 #### Next Steps
 

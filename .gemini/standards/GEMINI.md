@@ -4,6 +4,7 @@ purpose: "Provides a table of contents for all coding, documentation, and operat
 modification_date: "2025-07-21"
 tags: ["standards", "index", "principles"]
 ---
+
 # Standards Index & General Principles
 
 This file serves as a directory to all specific standards and defines the general, cross-cutting principles that apply to all code in this project.
@@ -32,11 +33,11 @@ These principles apply to both frontend and backend development.
 
 Refer to the table below to find the relevant guidelines for a particular task. These specific standards build upon the general principles defined above.
 
-| Topic Directory        | Description                                                                        |
-| :--------------------- | :--------------------------------------------------------------------------------- |
-| `architecture/`        | Defines core patterns for frontend-backend interaction, performance, and decoupling. |
-| `branching_ci_cd/`     | Defines the Git branching model, CI/CD pipeline standards, and deployment protocols. |
-| `commit_messages/`     | Specifies the format and style for writing clear and conventional commit messages.   |
-| `error_handling/`      | Defines standards for handling errors differently across various environments.       |
-| `frontend_specific/`   | Contains standards for frontend development, including component structure and styling. |
-| `backend_specific/`    | Contains standards for backend development, including API design and data modeling.  |
+| Topic Directory      | Description                                                                             |
+| :------------------- | :-------------------------------------------------------------------------------------- |
+| `architecture/`      | Defines core patterns for frontend-backend interaction, performance, and decoupling.    |
+| `branching_ci_cd/`   | Defines the Git branching model, CI/CD pipeline standards, and deployment protocols.    |
+| `commit_messages/`   | Specifies the format and style for writing clear and conventional commit messages.      |
+| `error_handling/`    | Defines standards for handling errors differently across various environments.          |
+| `frontend_specific/` | Contains standards for frontend development, including component structure and styling. |
+| `backend_specific/`  | Contains standards for backend development, including API design and data modeling.     |
