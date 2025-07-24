@@ -204,7 +204,7 @@ To create a professional-grade comic creation tool that empowers artists with:
 
 #### Frontend Architecture (SolidJS)
 
-```
+```txt
 src/
 ├── components/
 │   ├── Canvas/
@@ -245,7 +245,7 @@ src/
 
 #### Backend Architecture (Tauri/Rust)
 
-```
+```txt
 src-tauri/
 ├── src/
 │   ├── database/
@@ -404,7 +404,7 @@ interface AIProvider {
 
 **Modular Workflow Structure**
 
-```
+```txt
 .github/
 ├── workflows/
 │   ├── feature-branch.yml      # Feature branch validation
