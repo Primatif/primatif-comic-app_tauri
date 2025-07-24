@@ -1,10 +1,20 @@
-# Current Sprint: Foundational CI/CD for MVA
+# Current Sprint: Foundational CI/CD & Architecture
 
-**Sprint Goal:** Implement a basic Tauri application displaying database text, and establish a functional CI/CD pipeline for `dev` and `main` branches.
+**Sprint Goal:** Implement a basic Tauri application that demonstrates the core architectural principles (Responsive UI/Authoritative Backend) and establishes a functional CI/CD pipeline for `dev` and `main` branches.
 
 **Proposed Tasks:**
 
-## 1. Project Scaffolding
+## 1. Core Architectural Implementation & Verification
+
+- [ ] **Backend (View-Agnostic API):**
+  - [ ] Design the initial Tauri commands (`get_message`, `update_message`) to function as a clean, stable API contract, independent of any frontend implementation details.
+- [ ] **Frontend (Responsive UI Pattern):**
+  - [ ] Create a simple draggable UI element within the SolidJS frontend.
+  - [ ] **Real-time Loop:** The element's position must update smoothly in real-time (60fps) using a local SolidJS signal (`createSignal`) during the drag operation (`onMouseMove`). **No backend calls shall be made during the drag.**
+  - [ ] **Authoritative Loop:** On drag completion (`onMouseUp`), the final position must be sent to a dedicated Tauri command (`update_message`) to be persisted. This demonstrates the separation of concerns and serves as a tangible proof-of-concept for the core architectural pattern.
+- [ ] **Acceptance Criteria:** The application must visibly demonstrate the responsive UI pattern. Dragging the element should be smooth, and the final state must be correctly saved and re-loaded, proving the backend's authority.
+
+## 2. Project Scaffolding
 
 - [ ] Initialize a new Tauri project using `create-tauri-app` with SolidJS (frontend) and Rust (backend), adhering to the project's core technology stack.
 - [ ] Select the appropriate SolidJS UI template (e.g., `solid-ts`) to ensure a reactive and type-safe frontend foundation.
@@ -25,7 +35,7 @@
     - `config.rs` (for environment configuration, externalizing settings for different environments).
 - [ ] Perform an initial Git commit of the scaffolded project, establishing a clean baseline for version control.
 
-## 2. Database Integration (Rust Backend)
+## 3. Database Integration (Rust Backend)
 
 - [ ] Integrate `rusqlite` (or `sqlx` if preferred
   for async operations, aligning with
@@ -44,18 +54,20 @@
   - Retrieve the message from the database,
     demonstrating the backend's ability to serve data
     to the frontend.
+- [ ] Implement a second Tauri command (`update_message`) that accepts a string from the frontend and updates the message in the database. This will serve the "Authoritative Update Loop" for the architectural proof-of-concept.
 - [ ] Implement a basic, serializable `Result` type in Rust to ensure the frontend can clearly distinguish between successful data retrieval and potential backend errors during the `invoke` call.
 
-## 3. Frontend Display (SolidJS)
+## 4. Frontend Display (SolidJS)
 
 - [ ] Create a main SolidJS component (e.g., `src/App.tsx`) that utilizes Vite for development and building.
 - [ ] Install and configure the `@kobalte/core` UI toolkit to provide accessible and unstyled component primitives.
 - [ ] Implement a basic UI layout using Kobalte components (e.g., a `Text.Root` or a simple `div` with styling) to serve as a container for the application's content.
 - [ ] Use `invoke` from `@tauri-apps/api/tauri` to call the Rust Tauri command that retrieves the message from the database.
 - [ ] Display the retrieved message dynamically within a Kobalte `Text.Root` component.
+- [ ] Implement the draggable element required by the "Core Architectural Implementation" section, connecting its `onMouseUp` event to the `update_message` command.
 - [ ] Ensure basic styling is applied using Tailwind CSS, leveraging the global theming setup to style the Kobalte components.
 
-## 4. CI/CD Pipeline Setup (GitHub Actions)
+## 5. CI/CD Pipeline Setup (GitHub Actions)
 
 ### `dev-branch.yml`
 
@@ -82,7 +94,7 @@
     - [ ] **Secrets & Permissions**: Proactively create placeholders for required secrets (`TAURI_SIGNING_PRIVATE_KEY`, etc.) in the GitHub repository settings and ensure the workflow has the necessary `contents: write` permissions to prevent CI/CD failures.
     - [ ] **Future Distribution**: The workflow will be designed with modularity in mind. While the initial setup will publish artifacts only to GitHub Releases, a separate, subsequent job can be easily added in the future to download these artifacts and upload them to a GCP bucket for website distribution. This ensures the pipeline is extensible for future needs.
 
-## 5. Centralized & Structured Logging Setup (Tauri Best Practice)
+## 6. Centralized & Structured Logging Setup (Tauri Best Practice)
 
 - [ ] **Core Solution**: Utilize the official `tauri-plugin-log` for unified logging across frontend and backend, handling file management and rotation.
 - [ ] **Structured Format (JSON)**: All log entries will be written as structured JSON objects to ensure they are machine-parsable for future analysis and consumption. This will be achieved by:

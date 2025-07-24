@@ -3,13 +3,17 @@
 ## Project Overview
 
 ### Project Name
+
 Comic Panel Creator
 
 ### Project Description
+
 A comprehensive desktop application designed as a complete digital workspace for comic artists and creators. The application serves as an integrated platform for visual layout planning, content creation, and production workflow management, bridging traditional comic creation methods with modern AI-assisted tools and digital content capabilities.
 
 ### Project Vision
+
 To create a professional-grade comic creation tool that empowers artists with:
+
 1. **Intuitive Panel Design**: Visual-first layout creation with precision tools
 2. **Advanced Content System**: Each panel as an independent canvas supporting multiple content types
 3. **AI-Powered Assistance**: Multi-LLM integration for contextual script generation
@@ -19,39 +23,46 @@ To create a professional-grade comic creation tool that empowers artists with:
 ## Technology Stack
 
 ### Frontend Framework
+
 - **SolidJS**: Reactive frontend framework with fine-grained reactivity
 - **TypeScript**: Type-safe development with comprehensive interfaces
 - **Tailwind CSS**: Utility-first CSS framework for consistent styling
 - **Vite**: Fast build tool with hot module replacement
 
 ### Desktop Application Framework
+
 - **Tauri**: Rust-based desktop application framework
 - **Rust**: Backend systems programming language for performance
 - **WebView**: Native webview for cross-platform compatibility
 
 ### Database & Storage
+
 - **SQLite**: Embedded database with JSON support
 - **rusqlite**: Rust SQLite bindings for database operations
 - **File System API**: Local file storage for assets and exports
 
 ### Development Tools
+
 - **Vitest**: Unit testing framework
 - **ESLint**: Code linting and formatting
 - **Prettier**: Code formatting
 - **TypeScript Compiler**: Type checking and compilation
 
 ### Graphics & Rendering
+
 - **HTML5 Canvas**: 2D rendering for panels and content
 - **SVG**: Vector graphics support for scalable content
 - **WebGL**: GPU-accelerated rendering for complex operations
 
 ### AI Integration
+
 - **Multi-LLM Support**: Plugin-based architecture supporting multiple language models
 - **Provider Abstraction**: Common interface for OpenAI, Anthropic, Google, local models
 - **Contextual Processing**: Visual layout analysis and creative direction integration
 - **Response Handling**: Structured script generation with validation and fallback
 
 ### File Processing
+
 - **PDF Generation**: Professional print-ready export with color management
 - **Image Processing**: Thumbnail generation, optimization, and format conversion
 - **SVG Processing**: Vector graphics import, manipulation, and export
@@ -62,12 +73,14 @@ To create a professional-grade comic creation tool that empowers artists with:
 > **Note**: The following technology suggestions are recommendations based on current best practices and project requirements. These are not rigid constraints - if better alternatives are discovered during development that provide superior functionality, performance, or developer experience for our specific use case, they should be evaluated and adopted instead. The goal is to build the best possible application, not to adhere strictly to predetermined technology choices.
 
 ### Frontend Enhancements
+
 - **@kobalte/core**: Unstyled, accessible UI primitives for SolidJS
 - **solid-icons**: Icon library with tree-shaking support
 - **@solid-primitives/utils**: Collection of reactive utilities
 - **Konva.js**: Advanced 2D canvas library for panel manipulation
 
 ### Rust Backend Crates
+
 - **serde**: JSON serialization with derive support
 - **tokio**: Async runtime for concurrent operations
 - **anyhow/thiserror**: Error handling and propagation
@@ -76,6 +89,7 @@ To create a professional-grade comic creation tool that empowers artists with:
 - **reqwest**: HTTP client for external API integration
 
 ### Development & Testing
+
 - **@solidjs/testing-library**: SolidJS-specific testing utilities
 - **cargo-watch**: Auto-reload during Rust development
 - **vitest**: Frontend unit and integration testing
@@ -84,6 +98,7 @@ To create a professional-grade comic creation tool that empowers artists with:
 ## Standards & Requirements
 
 ### Security Standards
+
 - **API Key Protection**: Secure storage using Tauri's secure storage APIs
 - **Data Encryption**: Sensitive user data encrypted at rest using platform keychain
 - **Input Validation**: All user inputs sanitized and validated on both frontend and backend
@@ -92,6 +107,7 @@ To create a professional-grade comic creation tool that empowers artists with:
 - **Memory Safety**: Leverage Rust's memory safety guarantees to prevent buffer overflows
 
 ### Performance Requirements
+
 - **Application Startup**: Target < 3 seconds from launch to usable interface
 - **Canvas Rendering**: Maintain 60 FPS during panel manipulation and drawing operations
 - **Memory Usage**: Target < 200MB RAM usage for typical projects (10-20 pages)
@@ -100,6 +116,7 @@ To create a professional-grade comic creation tool that empowers artists with:
 - **AI API Calls**: Timeout handling and graceful degradation for network requests
 
 ### Accessibility Standards
+
 - **Screen Reader Compatibility**: Full ARIA support for all interactive elements
 - **Keyboard Navigation**: Complete keyboard accessibility without mouse dependency
 - **High Contrast Support**: Respect system color preferences and contrast settings
@@ -110,6 +127,7 @@ To create a professional-grade comic creation tool that empowers artists with:
 ### Future Architecture Considerations
 
 #### Plugin System (Future Implementation)
+
 - **Extensible Design**: Core architecture designed to support plugin integration
 - **API Boundaries**: Well-defined interfaces for future plugin attachment points
 - **Security Model**: Sandboxed execution environment for third-party code
@@ -117,6 +135,7 @@ To create a professional-grade comic creation tool that empowers artists with:
 - **Hot Loading**: Runtime plugin installation without application restart
 
 #### Data Export/Import & Backup (Future Implementation)
+
 - **Format Agnostic**: Export system designed to support multiple file formats
 - **Version Compatibility**: Forward and backward compatibility for project files
 - **Incremental Backup**: Support for differential backups of large projects
@@ -128,11 +147,13 @@ To create a professional-grade comic creation tool that empowers artists with:
 ### User Interface Architecture
 
 #### Three-Column Layout
+
 - **Left Sidebar (288px)**: Control panels for script generation, creative direction, panel operations, and canvas settings
 - **Center Canvas (flexible)**: Main workspace with 600x900px page on checkerboard background
 - **Right Sidebar (384px)**: Collection management, layout library, and project organization
 
 #### Canvas Experience
+
 - **Professional Guidelines**: Industry-standard cyan trim lines and magenta safe area markers
 - **Interactive Panel Creation**: Click anywhere on canvas to create new panels
 - **Visual Feedback**: Real-time panel manipulation with smooth animations
@@ -141,12 +162,14 @@ To create a professional-grade comic creation tool that empowers artists with:
 ### Core Functionality
 
 #### Panel-Based Content System
+
 - **Panel Entities**: Each panel functions as an independent canvas with its own coordinate system
 - **Sub-Content Architecture**: Panels contain perspective grids, drawings, text, images, and SVG elements
 - **Content Layering**: Multiple content types can coexist within panels with proper z-ordering
 - **Relative Positioning**: All panel content uses percentage-based positioning for scalability
 
 #### Advanced Drawing Capabilities
+
 - **Vector Drawing Engine**: Pressure-sensitive sketching with multiple brush types
 - **Perspective Grid System**: Interactive horizon lines with unlimited vanishing points
 - **Shape Primitives**: Rectangles, ellipses, and polygons with customizable styling
@@ -154,6 +177,7 @@ To create a professional-grade comic creation tool that empowers artists with:
 - **Asset Management**: Image and SVG import with transformation controls
 
 #### AI-Powered Script Generation
+
 - **Multi-LLM Integration**: Support for OpenAI, Anthropic, Google, and local language models
 - **Visual Context**: Canvas-to-image conversion provides visual layout context to AI
 - **Creative Direction**: Genre, tone, inspiration parameters guide script generation
@@ -161,12 +185,14 @@ To create a professional-grade comic creation tool that empowers artists with:
 - **Script Management**: Save, edit, and regenerate scripts with different parameters
 
 #### Collection & Project Management
+
 - **Book Organization**: Group layouts into collections representing complete comic books
 - **Page Sequencing**: Drag-and-drop ordering with automatic numbering
 - **Thumbnail System**: Auto-generated previews for quick navigation
 - **Metadata Tracking**: Creation dates, modification history, and project notes
 
 #### Professional Export Workflow
+
 - **High-Resolution Output**: 300 DPI PDF export with color management
 - **Format Options**: PDF for print, PNG for digital distribution
 - **Batch Processing**: Export entire collections or selected pages
@@ -177,6 +203,7 @@ To create a professional-grade comic creation tool that empowers artists with:
 ### Application Structure
 
 #### Frontend Architecture (SolidJS)
+
 ```
 src/
 ├── components/
@@ -217,6 +244,7 @@ src/
 ```
 
 #### Backend Architecture (Tauri/Rust)
+
 ```
 src-tauri/
 ├── src/
@@ -247,12 +275,14 @@ src-tauri/
 ### Data Architecture
 
 #### Panel Entity System
+
 - **Independent Entities**: Each panel is a separate database record with UUID
 - **Sub-Content Storage**: JSON fields for perspective grids, drawings, text, images
 - **Hierarchical Structure**: Collections → Layouts → Panels → Content
 - **Efficient Queries**: Optimized indexes for common access patterns
 
 #### Content Plugin System
+
 ```typescript
 interface ContentPlugin {
   type: string;
@@ -266,6 +296,7 @@ interface ContentPlugin {
 ```
 
 #### AI Provider Abstraction
+
 ```typescript
 interface AIProvider {
   name: string;
@@ -278,19 +309,27 @@ interface AIProvider {
 
 ### Performance Architecture
 
+#### Responsive UI / Authoritative Backend Pattern
+
+- **Frontend (Real-time Interaction Loop):** The SolidJS frontend is responsible for all high-frequency, real-time user interactions (e.g., dragging, resizing, drawing). It maintains a temporary, local UI state to provide a fluid, 60fps experience without waiting for the backend. This local state is considered non-authoritative.
+- **Backend (Authoritative Update Loop):** The Rust backend acts as the single source of truth. The frontend communicates the final, settled state of a user action (e.g., on mouse-up after a drag) to the backend via a Tauri command. The backend then validates this data, performs the necessary business logic, and persists the authoritative state to the database. This ensures data integrity and robustness while decoupling the UI's perceived performance from backend processing time.
+
 #### Rendering Optimization
+
 - **Layered Rendering**: Static (guidelines) and dynamic (panels) layers
 - **Viewport Culling**: Only render visible panels and content
 - **Dirty Region Tracking**: Incremental updates for changed areas
 - **GPU Acceleration**: WebGL for complex operations and effects
 
 #### Memory Management
+
 - **Lazy Loading**: Load panel content on-demand
 - **Resource Pooling**: Reuse canvas contexts and rendering resources
 - **Efficient Serialization**: Minimal JSON payload for database storage
 - **Garbage Collection**: Proper cleanup of unused resources
 
 #### Database Performance
+
 - **Connection Pooling**: Reuse database connections
 - **Query Optimization**: Prepared statements and efficient indexes
 - **Batch Operations**: Group multiple operations for efficiency
@@ -299,12 +338,14 @@ interface AIProvider {
 ### Extensibility Design
 
 #### Plugin Architecture
+
 - **Dynamic Loading**: Load plugins at runtime
 - **Sandboxed Execution**: Safe plugin execution environment
 - **API Versioning**: Backward compatibility for plugin updates
 - **Event System**: Plugin communication via events
 
 #### Content Type System
+
 - **Polymorphic Content**: Unified interface for all content types
 - **Custom Renderers**: Plugin-provided rendering logic
 - **Tool Integration**: Custom tools for content manipulation
@@ -313,12 +354,14 @@ interface AIProvider {
 ### Security & Privacy
 
 #### Data Protection
+
 - **Local-Only Storage**: No cloud synchronization or telemetry
 - **Encrypted Credentials**: Secure API key storage
 - **File Permissions**: Standard user-level file access
 - **Input Validation**: Prevent injection attacks and malformed data
 
 #### API Security
+
 - **Key Management**: Secure storage and rotation of API keys
 - **Request Validation**: Validate all external API requests
 - **Error Handling**: Graceful failure without exposing sensitive data
@@ -329,6 +372,7 @@ interface AIProvider {
 ### Branching Strategy
 
 #### Branch Structure
+
 - **`main`**: Production-ready releases only
   - Always deployable and stable
   - Automated releases triggered on merge
@@ -348,6 +392,7 @@ interface AIProvider {
   - Naming convention: `feature/description-of-feature`
 
 #### Workflow Process
+
 1. **Feature Development**: Create feature branch from `dev`
 2. **Feature Integration**: Merge feature to `dev` via PR
 3. **Release Preparation**: When `dev` is stable, create PR to `main`
@@ -358,6 +403,7 @@ interface AIProvider {
 #### Workflow Architecture
 
 **Modular Workflow Structure**
+
 ```
 .github/
 ├── workflows/
@@ -379,6 +425,7 @@ interface AIProvider {
 **Triggers**: Push to `feature/*` branches, PR creation to `dev`
 
 **Workflow Steps**:
+
 1. **Environment Setup**
    - Node.js and Rust toolchain installation
    - Dependency caching and installation
@@ -409,6 +456,7 @@ interface AIProvider {
 **Triggers**: Push to `dev` branch, PR merge from feature branches
 
 **Workflow Steps**:
+
 1. **Full Environment Setup**
    - Multi-platform matrix (Ubuntu, macOS, Windows)
    - Complete toolchain installation
@@ -440,6 +488,7 @@ interface AIProvider {
 **Triggers**: Push to `main` branch (from dev branch PR merge)
 
 **Workflow Steps**:
+
 1. **Pre-Release Validation**
    - Complete test suite execution
    - Security vulnerability assessment
@@ -470,6 +519,7 @@ interface AIProvider {
 #### Reusable Workflow Components
 
 **Test Suite Workflow** (`shared/test-suite.yml`)
+
 ```yaml
 name: Test Suite
 inputs:
@@ -485,6 +535,7 @@ inputs:
 ```
 
 **Build Matrix Workflow** (`shared/build-matrix.yml`)
+
 ```yaml
 name: Build Matrix
 inputs:
@@ -497,6 +548,7 @@ inputs:
 ```
 
 **Security Scan Workflow** (`shared/security-scan.yml`)
+
 ```yaml
 name: Security Scan
 inputs:
@@ -511,18 +563,21 @@ inputs:
 #### Custom GitHub Actions
 
 **Setup Environment Action** (`actions/setup-environment`)
+
 - Installs Node.js, Rust, and system dependencies
 - Configures caching for npm and Cargo
 - Sets up environment variables and secrets
 - Validates toolchain versions
 
 **Run Tests Action** (`actions/run-tests`)
+
 - Executes specified test suites
 - Handles test result reporting
 - Manages test artifacts and coverage
 - Provides detailed failure information
 
 **Create Release Action** (`actions/create-release`)
+
 - Calculates semantic version from commits
 - Generates changelog and release notes
 - Creates GitHub Release with assets
@@ -531,18 +586,21 @@ inputs:
 #### Pipeline Monitoring
 
 **Metrics Collection**
+
 - Build duration tracking
 - Test execution times
 - Failure rate monitoring
 - Performance regression detection
 
 **Notifications**
+
 - Slack/Discord integration for failures
 - Email notifications for releases
 - PR status updates
 - Performance alerts
 
 **Optimization Strategies**
+
 - Parallel job execution
 - Intelligent caching strategies
 - Conditional step execution
@@ -551,17 +609,20 @@ inputs:
 ### Early Release Strategy
 
 #### Placeholder Application
+
 - **Minimal Viable App**: Basic Tauri + SolidJS scaffold
 - **No Features**: Empty application with proper architecture
 - **Installation Testing**: Verify distribution and installation process
 - **User Feedback**: Early adopter testing of installation experience
 
 #### Release Channels
+
 - **Alpha**: Automated releases from `main` branch
 - **Pre-release**: Feature-complete but potentially unstable
 - **Stable**: Manually promoted releases after thorough testing
 
 #### Distribution
+
 - **GitHub Releases**: Primary distribution method
 - **Platform Installers**: Native installers for each OS
 - **Auto-Updates**: Built-in update mechanism for users
@@ -570,12 +631,14 @@ inputs:
 ### Quality Assurance
 
 #### Pre-Release Gates
+
 - **All Tests Pass**: 100% test suite success required
 - **Code Coverage**: Minimum threshold enforcement
 - **Performance Benchmarks**: No regression in key metrics
 - **Security Validation**: No high-severity vulnerabilities
 
 #### Single-Developer Workflow
+
 - **Self-Review Process**: Mandatory waiting period before self-merge
 - **Automated Validation**: Comprehensive CI/CD as substitute for peer review
 - **Documentation Requirements**: All changes must include documentation
@@ -584,12 +647,14 @@ inputs:
 ### Development Environment
 
 #### Local Development
+
 - **Consistent Setup**: Docker or standardized tool versions
 - **Hot Reload**: Immediate feedback during development
 - **Debug Tools**: Integrated debugging for both frontend and backend
 - **Test Environment**: Local database and service mocking
 
 #### Development Tools
+
 - **Code Editor**: VS Code with project-specific extensions
 - **Version Control**: Git with conventional commit messages
 - **Package Management**: npm with lockfile enforcement
@@ -600,7 +665,9 @@ inputs:
 ### Component Architecture
 
 #### Directory Structure
+
 **Standard Component Organization**
+
 ```
 components/
 ├── FeatureName/
@@ -615,13 +682,16 @@ components/
 ```
 
 **Principles**
+
 - **Single Responsibility**: Each component has one clear purpose
 - **Directory Encapsulation**: Related components grouped in feature directories
 - **Clean Imports**: Use index files to abstract internal structure
 - **Utility Separation**: Extract non-UI logic into utility functions
 
 #### Component Decomposition
+
 **Extract Over Embed**
+
 ```typescript
 // ❌ Avoid: Large monolithic components
 const MonolithicComponent = () => {
@@ -645,6 +715,7 @@ const MainComponent = () => {
 ```
 
 **Component Hierarchy Guidelines**
+
 - **Composition Over Inheritance**: Use component composition patterns
 - **Props Drilling Prevention**: Extract subcomponents to reduce prop passing
 - **Render Function Extraction**: Convert inline render functions to components
@@ -653,7 +724,9 @@ const MainComponent = () => {
 ### Documentation Standards
 
 #### Component Documentation
+
 **TSDoc Format**
+
 ```typescript
 /**
  * ComponentName Component
@@ -666,6 +739,7 @@ const MainComponent = () => {
 ```
 
 **Interface Documentation**
+
 ```typescript
 /**
  * Props interface for ComponentName component
@@ -681,13 +755,16 @@ interface ComponentProps {
 ```
 
 #### Code Documentation
+
 **Inline Comments**
+
 - **Complex Logic**: Explain non-obvious business logic
 - **State Transitions**: Document state changes and side effects
 - **API Interactions**: Describe external service integrations
 - **Performance Considerations**: Note optimization decisions
 
 **Avoid Over-Documentation**
+
 - No DEBUG flags or verbose logging utilities
 - Focus on clarity through naming over extensive commenting
 - Document intent, not implementation details
@@ -695,7 +772,9 @@ interface ComponentProps {
 ### HTML & Accessibility Standards
 
 #### Element Identification
+
 **Required Attributes**
+
 ```jsx
 <div 
   id="component-name-element-purpose"
@@ -713,12 +792,14 @@ interface ComponentProps {
 ```
 
 **Naming Conventions**
+
 - **IDs**: `component-name-element-purpose` (kebab-case)
 - **Test IDs**: Match ID format for consistency
 - **Descriptive**: Include component context and element purpose
 - **Unique**: Ensure uniqueness within component scope
 
 #### Semantic HTML
+
 ```jsx
 // ✅ Use semantic elements
 <article id="layout-preview-article">
@@ -739,7 +820,9 @@ interface ComponentProps {
 ### Export Patterns
 
 #### Component Exports
+
 **Index File Pattern**
+
 ```typescript
 // components/ComponentName/index.ts
 export { ComponentName } from './ComponentName';
@@ -747,6 +830,7 @@ export type { ComponentProps } from './ComponentName';
 ```
 
 **Multi-Component Exports**
+
 ```typescript
 // components/FeatureName/index.ts
 export { MainComponent } from './MainComponent';
@@ -756,6 +840,7 @@ export type { FeatureProps } from './types';
 ```
 
 #### Import Conventions
+
 ```typescript
 // ✅ Import from directories
 import { ComponentName } from 'components/ComponentName';
@@ -768,7 +853,9 @@ import { ComponentName } from 'components/ComponentName/ComponentName';
 ### State Management
 
 #### Component State
+
 **Local State First**
+
 ```typescript
 // ✅ Use local state for component-specific data
 const Component = () => {
@@ -780,6 +867,7 @@ const Component = () => {
 ```
 
 **Custom Hooks for Logic**
+
 ```typescript
 // ✅ Extract complex state logic
 const useComponentLogic = (initialData: Data) => {
@@ -795,7 +883,9 @@ const useComponentLogic = (initialData: Data) => {
 ```
 
 #### Global State
+
 **Stores for Shared Data**
+
 ```typescript
 // stores/featureStore.ts
 interface FeatureState {
@@ -816,7 +906,9 @@ export { featureStore, setFeatureStore };
 ### Type Safety
 
 #### Interface Design
+
 **Focused Interfaces**
+
 ```typescript
 // ✅ Single-purpose interfaces
 interface PanelData {
@@ -833,6 +925,7 @@ interface PanelActions {
 ```
 
 **Type Composition**
+
 ```typescript
 // ✅ Compose types for complex props
 type PanelProps = PanelData & PanelActions & {
@@ -844,6 +937,7 @@ type PanelProps = PanelData & PanelActions & {
 ### Error Handling
 
 #### Component Error Boundaries
+
 ```typescript
 // ✅ Wrap feature components in error boundaries
 <ErrorBoundary fallback={<FeatureErrorFallback />}>
@@ -852,6 +946,7 @@ type PanelProps = PanelData & PanelActions & {
 ```
 
 #### Graceful Degradation
+
 ```typescript
 // ✅ Handle missing data gracefully
 const Component = (props: Props) => {
@@ -871,6 +966,7 @@ const Component = (props: Props) => {
 ### Performance Considerations
 
 #### Memoization Strategy
+
 ```typescript
 // ✅ Memoize expensive calculations
 const ExpensiveComponent = (props: Props) => {
@@ -883,6 +979,7 @@ const ExpensiveComponent = (props: Props) => {
 ```
 
 #### Component Optimization
+
 ```typescript
 // ✅ Prevent unnecessary re-renders with lazy evaluation
 const OptimizedComponent = (props: Props) => {
@@ -897,7 +994,9 @@ const OptimizedComponent = (props: Props) => {
 ### Testing Strategy
 
 #### Component Testing
+
 **Test Structure**
+
 ```typescript
 // ComponentName.test.tsx
 describe('ComponentName', () => {
@@ -922,6 +1021,7 @@ describe('ComponentName', () => {
 ```
 
 #### Testing Utilities
+
 ```typescript
 // tests/utils/renderWithProviders.tsx
 export const renderWithProviders = (ui: () => JSX.Element) => {
@@ -938,6 +1038,7 @@ export const renderWithProviders = (ui: () => JSX.Element) => {
 ### Anti-Patterns to Avoid
 
 #### Monolithic Components
+
 ```typescript
 // ❌ Avoid: Single large component file
 const MegaComponent = () => {
@@ -951,6 +1052,7 @@ const MegaComponent = () => {
 ```
 
 #### Prop Drilling
+
 ```typescript
 // ❌ Avoid: Deep prop passing
 <Parent>
@@ -963,6 +1065,7 @@ const MegaComponent = () => {
 ```
 
 #### Inline Styles
+
 ```typescript
 // ❌ Avoid: Inline styles for complex styling
 <div style={{ "background-color": "red", padding: "20px" }}>
@@ -978,12 +1081,14 @@ const MegaComponent = () => {
 ### Code Organization Principles
 
 #### Feature-Based Structure
+
 - **Colocation**: Keep related files together
 - **Boundary Definition**: Clear feature boundaries
 - **Dependency Direction**: Features depend on shared, not each other
 - **Scalability**: Structure supports growth without major refactoring
 
 #### Separation of Concerns
+
 - **UI Components**: Focus on presentation
 - **Business Logic**: Extract to custom hooks or services
 - **Data Layer**: Separate data access and state management
@@ -992,7 +1097,9 @@ const MegaComponent = () => {
 ### Backend Architecture (Tauri Rust)
 
 #### Layered Architecture
+
 **Service Layer Separation**
+
 ```rust
 // src/services/layout_service.rs
 use crate::database::LayoutRepository;
@@ -1016,6 +1123,7 @@ impl LayoutService {
 ```
 
 **Repository Pattern**
+
 ```rust
 // src/database/layout_repository.rs
 use rusqlite::{Connection, Result};
@@ -1041,7 +1149,9 @@ impl LayoutRepository {
 ```
 
 #### Database Management
+
 **Connection Management**
+
 ```rust
 // src/database/mod.rs
 use rusqlite::{Connection, Result};
@@ -1068,6 +1178,7 @@ impl DatabaseManager {
 ```
 
 **Migration System**
+
 ```rust
 // src/database/migrations.rs
 use rusqlite::{Connection, Result};
@@ -1107,7 +1218,9 @@ impl MigrationRunner {
 ```
 
 #### Error Handling
+
 **Custom Error Types**
+
 ```rust
 // src/errors.rs
 use thiserror::Error;
@@ -1131,6 +1244,7 @@ pub type Result<T> = std::result::Result<T, AppError>;
 ```
 
 **Service Error Handling**
+
 ```rust
 // src/services/layout_service.rs
 use crate::errors::{AppError, Result};
@@ -1157,7 +1271,9 @@ impl LayoutService {
 ```
 
 #### Configuration Management
+
 **Environment Configuration**
+
 ```rust
 // src/config.rs
 use serde::Deserialize;
@@ -1195,7 +1311,9 @@ impl Config {
 ```
 
 #### Transaction Management
+
 **Transaction Wrapper**
+
 ```rust
 // src/database/transaction.rs
 use rusqlite::{Connection, Transaction, Result};
@@ -1227,6 +1345,7 @@ impl<'a> TransactionManager<'a> {
 ```
 
 **Service Transaction Usage**
+
 ```rust
 // src/services/layout_service.rs
 impl LayoutService {
@@ -1257,7 +1376,9 @@ impl LayoutService {
 ```
 
 #### File System Operations
+
 **File Management Service**
+
 ```rust
 // src/services/file_service.rs
 use std::path::{Path, PathBuf};
@@ -1302,7 +1423,9 @@ impl FileService {
 ```
 
 #### Tauri Command Integration
+
 **Command Handlers**
+
 ```rust
 // src/commands/layout_commands.rs
 use tauri::State;
@@ -1337,6 +1460,7 @@ pub async fn update_layout(
 ```
 
 **Application State Management**
+
 ```rust
 // src/main.rs
 use tauri::Manager;
@@ -1371,7 +1495,9 @@ fn main() {
 ```
 
 #### Testing Strategy
+
 **Unit Testing**
+
 ```rust
 // src/services/layout_service.rs
 #[cfg(test)]
@@ -1400,7 +1526,9 @@ mod tests {
 ```
 
 #### Backend Conventions Summary
+
 **Architectural Principles**
+
 - **Layered Architecture**: Clear separation between commands, services, repositories, and database
 - **Dependency Injection**: Use Tauri's state management for service dependencies
 - **Error Handling**: Custom error types with proper error propagation
@@ -1411,6 +1539,7 @@ mod tests {
 - **Documentation**: Rust doc comments for all public APIs
 
 **Code Organization**
+
 - **Modular Structure**: Feature-based organization with clear module boundaries
 - **Single Responsibility**: Each service handles one domain area
 - **Consistent Naming**: Clear, descriptive names following Rust conventions
@@ -1420,26 +1549,30 @@ mod tests {
 ## Technical Constraints
 
 ### Platform Support
+
 - **Primary Platforms**: Windows, macOS, Linux
-- **Minimum Requirements**: 
+- **Minimum Requirements**:
   - 4GB RAM
   - 1GB available storage
   - OpenGL 3.3 support
   - 1280x720 minimum resolution
 
 ### Performance Requirements
+
 - **Startup Time**: < 3 seconds to fully loaded
 - **Panel Operations**: 60fps interactions
 - **Export Performance**: < 30 seconds for standard page export
 - **Memory Usage**: < 500MB for typical project
 
 ### Data Requirements
+
 - **Database Size**: Support for 1000+ layouts per collection
 - **File Size**: Individual layout files < 10MB
 - **Backup Size**: Complete project export < 100MB
 - **Concurrent Access**: Single-user application
 
 ### Security Requirements
+
 - **Local Storage**: All data stored locally
 - **API Security**: Secure API key management
 - **Data Privacy**: No telemetry or tracking
@@ -1448,24 +1581,28 @@ mod tests {
 ## Deliverables
 
 ### Phase 1: Core Foundation
+
 - **Tauri Application Shell**: Basic desktop app structure
 - **SolidJS Frontend**: Reactive component system
 - **SQLite Database**: Schema and basic operations
 - **Panel System**: Basic panel creation and manipulation
 
 ### Phase 2: Content System
+
 - **Panel Content Architecture**: Entity-based panel system
 - **Drawing Tools**: Basic sketching capabilities
 - **Text System**: Text placement and formatting
 - **Image Support**: Basic image import and positioning
 
 ### Phase 3: Advanced Features
+
 - **AI Integration**: Script generation with Claude API
 - **Export System**: PDF/PNG export with professional settings
 - **Collection Management**: Complete book organization
 - **Plugin Architecture**: Extensible system foundation
 
 ### Phase 4: Polish & Migration
+
 - **Data Migration Tools**: PostgreSQL to SQLite migration
 - **Performance Optimization**: GPU acceleration and optimizations
 - **User Experience**: Polish and refinement
@@ -1474,18 +1611,21 @@ mod tests {
 ## Success Criteria
 
 ### Functional Requirements
+
 - **Feature Parity**: All existing features from React version
 - **Performance**: Significant improvement in responsiveness
 - **Stability**: No crashes during normal operation
 - **Data Integrity**: No data loss during migration or operation
 
 ### Technical Requirements
+
 - **Cross-Platform**: Consistent behavior across all platforms
 - **Offline Operation**: Full functionality without internet
 - **Professional Output**: Print-ready export quality
 - **Extensibility**: Plugin system ready for future enhancements
 
 ### User Experience Requirements
+
 - **Intuitive Interface**: Easy transition for existing users
 - **Professional Workflow**: Efficient comic creation process
 - **Reliable Performance**: Consistent 60fps interactions
@@ -1494,12 +1634,14 @@ mod tests {
 ## Project Timeline
 
 ### Development Schedule
+
 - **Phase 1**: 4-6 weeks - Foundation and core systems
 - **Phase 2**: 6-8 weeks - Content creation capabilities
 - **Phase 3**: 4-6 weeks - Advanced features and integrations
 - **Phase 4**: 2-4 weeks - Polish, migration, and documentation
 
 ### Milestones
+
 - **Milestone 1**: Basic panel system functional
 - **Milestone 2**: Content creation tools operational
 - **Milestone 3**: AI integration and export system complete
@@ -1508,12 +1650,14 @@ mod tests {
 ## Risk Assessment
 
 ### Technical Risks
+
 - **Tauri Learning Curve**: New framework adoption
 - **Performance Challenges**: Complex rendering requirements
 - **Database Migration**: Data integrity during transition
 - **Cross-Platform Compatibility**: Consistent behavior across platforms
 
 ### Mitigation Strategies
+
 - **Prototyping**: Early proof-of-concept development
 - **Incremental Migration**: Gradual feature implementation
 - **Testing Strategy**: Comprehensive cross-platform testing
