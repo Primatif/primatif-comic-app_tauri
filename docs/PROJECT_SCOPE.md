@@ -302,7 +302,10 @@ interface ContentPlugin {
 ```typescript
 interface AIProvider {
   name: string;
-  generateScript(layout: LayoutData, direction: CreativeDirection): Promise<ComicScript>;
+  generateScript(
+    layout: LayoutData,
+    direction: CreativeDirection,
+  ): Promise<ComicScript>;
   validateApiKey(key: string): Promise<boolean>;
   getModels(): Promise<Model[]>;
   estimateTokens(content: string): number;
@@ -526,13 +529,13 @@ interface AIProvider {
 name: Test Suite
 inputs:
   test-level:
-    description: 'Test level: unit, integration, e2e'
+    description: "Test level: unit, integration, e2e"
     required: true
   platform:
-    description: 'Target platform'
+    description: "Target platform"
     required: true
   coverage:
-    description: 'Generate coverage report'
+    description: "Generate coverage report"
     default: false
 ```
 
@@ -542,10 +545,10 @@ inputs:
 name: Build Matrix
 inputs:
   build-type:
-    description: 'Build type: development, release'
+    description: "Build type: development, release"
     required: true
   sign-artifacts:
-    description: 'Sign build artifacts'
+    description: "Sign build artifacts"
     default: false
 ```
 
@@ -555,11 +558,11 @@ inputs:
 name: Security Scan
 inputs:
   scan-type:
-    description: 'Scan type: dependencies, secrets, code'
+    description: "Scan type: dependencies, secrets, code"
     required: true
   fail-on-severity:
-    description: 'Minimum severity to fail build'
-    default: 'high'
+    description: "Minimum severity to fail build"
+    default: "high"
 ```
 
 #### Custom GitHub Actions
@@ -732,10 +735,10 @@ const MainComponent = () => {
 ```typescript
 /**
  * ComponentName Component
- * 
+ *
  * Brief description of component purpose and functionality.
  * Include key behaviors, responsibilities, and usage context.
- * 
+ *
  * @module ComponentName
  */
 ```
@@ -778,12 +781,12 @@ interface ComponentProps {
 **Required Attributes**
 
 ```jsx
-<div 
+<div
   id="component-name-element-purpose"
   data-testid="component-name-element-purpose"
   class="styling-classes"
 >
-  <button 
+  <button
     id="component-name-submit-button"
     data-testid="component-name-submit-button"
     onClick={handleSubmit}
@@ -809,12 +812,8 @@ interface ComponentProps {
     <h2 id="layout-preview-title">Layout Preview</h2>
   </header>
   <section id="layout-preview-content">
-    <nav id="layout-preview-navigation">
-      {/* Navigation content */}
-    </nav>
-    <main id="layout-preview-main">
-      {/* Main content */}
-    </main>
+    <nav id="layout-preview-navigation">{/* Navigation content */}</nav>
+    <main id="layout-preview-main">{/* Main content */}</main>
   </section>
 </article>
 ```
@@ -827,29 +826,29 @@ interface ComponentProps {
 
 ```typescript
 // components/ComponentName/index.ts
-export { ComponentName } from './ComponentName';
-export type { ComponentProps } from './ComponentName';
+export { ComponentName } from "./ComponentName";
+export type { ComponentProps } from "./ComponentName";
 ```
 
 **Multi-Component Exports**
 
 ```typescript
 // components/FeatureName/index.ts
-export { MainComponent } from './MainComponent';
-export { SubComponent1 } from './SubComponent1';
-export { SubComponent2 } from './SubComponent2';
-export type { FeatureProps } from './types';
+export { MainComponent } from "./MainComponent";
+export { SubComponent1 } from "./SubComponent1";
+export { SubComponent2 } from "./SubComponent2";
+export type { FeatureProps } from "./types";
 ```
 
 #### Import Conventions
 
 ```typescript
 // ✅ Import from directories
-import { ComponentName } from 'components/ComponentName';
-import { FeatureComponent } from 'components/FeatureName';
+import { ComponentName } from "components/ComponentName";
+import { FeatureComponent } from "components/FeatureName";
 
 // ❌ Avoid direct file imports
-import { ComponentName } from 'components/ComponentName/ComponentName';
+import { ComponentName } from "components/ComponentName/ComponentName";
 ```
 
 ### State Management
@@ -863,7 +862,7 @@ import { ComponentName } from 'components/ComponentName/ComponentName';
 const Component = () => {
   const [isVisible, setIsVisible] = createSignal(false);
   const [formData, setFormData] = createSignal(initialData);
-  
+
   return (/* JSX */);
 };
 ```
@@ -874,12 +873,12 @@ const Component = () => {
 // ✅ Extract complex state logic
 const useComponentLogic = (initialData: Data) => {
   const [state, setState] = createSignal(initialData);
-  
+
   const handleAction = (action: Action) => {
     // Complex state logic
     setState(prevState => /* updated state */);
   };
-  
+
   return { state, handleAction };
 };
 ```
@@ -930,10 +929,11 @@ interface PanelActions {
 
 ```typescript
 // ✅ Compose types for complex props
-type PanelProps = PanelData & PanelActions & {
-  isSelected: boolean;
-  className?: string;
-};
+type PanelProps = PanelData &
+  PanelActions & {
+    isSelected: boolean;
+    className?: string;
+  };
 ```
 
 ### Error Handling
@@ -975,7 +975,7 @@ const ExpensiveComponent = (props: Props) => {
   const processedData = createMemo(() => {
     return expensiveProcessing(props.data);
   });
-  
+
   return <DataView data={processedData()} />;
 };
 ```
@@ -1001,21 +1001,21 @@ const OptimizedComponent = (props: Props) => {
 
 ```typescript
 // ComponentName.test.tsx
-describe('ComponentName', () => {
-  describe('rendering', () => {
-    it('renders with required props', () => {
+describe("ComponentName", () => {
+  describe("rendering", () => {
+    it("renders with required props", () => {
       // Test basic rendering
     });
   });
-  
-  describe('interactions', () => {
-    it('handles user actions correctly', () => {
+
+  describe("interactions", () => {
+    it("handles user actions correctly", () => {
       // Test user interactions
     });
   });
-  
-  describe('state management', () => {
-    it('updates state on actions', () => {
+
+  describe("state management", () => {
+    it("updates state on actions", () => {
       // Test state changes
     });
   });
@@ -1117,7 +1117,7 @@ impl LayoutService {
         // Business logic here
         self.repository.create(params).await
     }
-    
+
     pub async fn get_layout_by_id(&self, id: u32) -> Result<Option<Layout>> {
         self.repository.find_by_id(id).await
     }
@@ -1139,11 +1139,11 @@ impl LayoutRepository {
     pub fn new(connection: Connection) -> Self {
         Self { connection }
     }
-    
+
     pub async fn create(&self, params: CreateLayoutParams) -> Result<u32> {
         // Database operations here
     }
-    
+
     pub async fn find_by_id(&self, id: u32) -> Result<Option<Layout>> {
         // Query implementation
     }
@@ -1170,7 +1170,7 @@ impl DatabaseManager {
             connection: Arc::new(Mutex::new(connection)),
         })
     }
-    
+
     pub fn initialize_schema(&self) -> Result<()> {
         let schema = include_str!("schema.sql");
         self.connection.lock().unwrap().execute_batch(schema)?;
@@ -1192,17 +1192,17 @@ pub struct MigrationRunner {
 impl MigrationRunner {
     pub fn run_migrations(&self) -> Result<()> {
         let migrations = self.get_pending_migrations()?;
-        
+
         for migration in migrations {
             self.run_migration(migration)?;
         }
-        
+
         Ok(())
     }
-    
+
     fn run_migration(&self, migration: Migration) -> Result<()> {
         let tx = self.connection.transaction()?;
-        
+
         match tx.execute_batch(&migration.sql) {
             Ok(_) => {
                 tx.commit()?;
@@ -1213,7 +1213,7 @@ impl MigrationRunner {
                 return Err(e);
             }
         }
-        
+
         Ok(())
     }
 }
@@ -1231,13 +1231,13 @@ use thiserror::Error;
 pub enum AppError {
     #[error("Database error: {0}")]
     Database(#[from] rusqlite::Error),
-    
+
     #[error("Validation error: {0}")]
     Validation(String),
-    
+
     #[error("Not found: {0}")]
     NotFound(String),
-    
+
     #[error("File system error: {0}")]
     FileSystem(#[from] std::io::Error),
 }
@@ -1257,16 +1257,16 @@ impl LayoutService {
         if params.name.is_empty() {
             return Err(AppError::Validation("Name cannot be empty".to_string()));
         }
-        
+
         // Check if layout exists
         let layout = self.repository.find_by_id(id).await?
             .ok_or_else(|| AppError::NotFound(format!("Layout with id {} not found", id)))?;
-        
+
         // Business logic validation
         if layout.page_type == "front_cover" && params.name != "Front Cover" {
             return Err(AppError::Validation("Cannot change front cover name".to_string()));
         }
-        
+
         self.repository.update(id, params).await
     }
 }
@@ -1298,15 +1298,15 @@ impl Config {
             anthropic_api_key: env::var("ANTHROPIC_API_KEY").ok(),
         })
     }
-    
+
     pub fn ensure_directories(&self) -> std::io::Result<()> {
         std::fs::create_dir_all(&self.thumbnail_storage_path)?;
-        
+
         // Ensure database directory exists
         if let Some(parent) = std::path::Path::new(&self.database_path).parent() {
             std::fs::create_dir_all(parent)?;
         }
-        
+
         Ok(())
     }
 }
@@ -1330,7 +1330,7 @@ impl<'a> TransactionManager<'a> {
             transaction: connection.transaction()?,
         })
     }
-    
+
     pub fn execute<F, T>(&mut self, operation: F) -> Result<T>
     where
         F: FnOnce(&Transaction) -> Result<T>,
@@ -1339,7 +1339,7 @@ impl<'a> TransactionManager<'a> {
         self.transaction.commit()?;
         Ok(result)
     }
-    
+
     pub fn rollback(self) -> Result<()> {
         self.transaction.rollback()
     }
@@ -1352,25 +1352,25 @@ impl<'a> TransactionManager<'a> {
 // src/services/layout_service.rs
 impl LayoutService {
     pub async fn create_layout_with_thumbnail(
-        &self, 
-        params: CreateLayoutParams, 
+        &self,
+        params: CreateLayoutParams,
         thumbnail_data: Option<Vec<u8>>
     ) -> Result<u32> {
         let mut tx = TransactionManager::new(&self.connection)?;
-        
+
         tx.execute(|tx| {
             // Create layout
             let layout_id = self.repository.create_with_transaction(tx, params)?;
-            
+
             // Save thumbnail if provided
             if let Some(data) = thumbnail_data {
                 let thumbnail_path = self.save_thumbnail(layout_id, data)?;
                 self.repository.update_thumbnail_path(tx, layout_id, thumbnail_path)?;
             }
-            
+
             // Reset display order
             self.repository.reset_display_order(tx, params.collection_id)?;
-            
+
             Ok(layout_id)
         })
     }
@@ -1397,28 +1397,28 @@ impl FileService {
             storage_path: storage_path.as_ref().to_path_buf(),
         }
     }
-    
+
     pub fn save_thumbnail(&self, layout_id: u32, data: Vec<u8>) -> Result<String> {
         let filename = format!("layout_{}_thumbnail.png", layout_id);
         let file_path = self.storage_path.join(&filename);
-        
+
         // Ensure directory exists
         if let Some(parent) = file_path.parent() {
             fs::create_dir_all(parent)?;
         }
-        
+
         fs::write(&file_path, data)?;
-        
+
         Ok(filename)
     }
-    
+
     pub fn delete_thumbnail(&self, filename: &str) -> Result<()> {
         let file_path = self.storage_path.join(filename);
-        
+
         if file_path.exists() {
             fs::remove_file(file_path)?;
         }
-        
+
         Ok(())
     }
 }
@@ -1475,15 +1475,15 @@ fn main() {
         .setup(|app| {
             let config = Config::from_env()?;
             config.ensure_directories()?;
-            
+
             let db_manager = DatabaseManager::new(&config.database_path)?;
             db_manager.initialize_schema()?;
-            
+
             let layout_service = LayoutService::new(db_manager);
-            
+
             app.manage(layout_service);
             app.manage(config);
-            
+
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
@@ -1506,21 +1506,21 @@ fn main() {
 mod tests {
     use super::*;
     use crate::database::test_utils::create_test_db;
-    
+
     #[tokio::test]
     async fn test_create_layout() {
         let db = create_test_db().await;
         let service = LayoutService::new(db);
-        
+
         let params = CreateLayoutParams {
             collection_id: 1,
             name: "Test Layout".to_string(),
             panel_data: serde_json::json!({"panels": []}),
         };
-        
+
         let result = service.create_layout(params).await;
         assert!(result.is_ok());
-        
+
         let layout_id = result.unwrap();
         assert!(layout_id > 0);
     }

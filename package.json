@@ -10,16 +10,19 @@
     "build": "vite build",
     "serve": "vite preview",
     "tauri": "tauri",
-    "format:md": "prettier --write \"docs/**/*.md\""
+    "format": "prettier --write .",
+    "lint:md:fix": "markdownlint-cli2 --fix"
   },
   "license": "PolyForm Strict License 1.0.0",
   "dependencies": {
-    "solid-js": "^1.9.3",
     "@tauri-apps/api": "^2",
-    "@tauri-apps/plugin-opener": "^2"
+    "@tauri-apps/plugin-opener": "^2",
+    "solid-js": "^1.9.3"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2",
+    "markdownlint-cli2": "^0.13.0",
+    "prettier": "^3.6.2",
     "typescript": "~5.6.2",
     "vite": "^6.0.3",
     "vite-plugin-solid": "^2.11.0",

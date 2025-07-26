@@ -6,7 +6,5 @@
     "MD033": false,
     "MD041": false
   },
-  "ignores": [
-    "docs/PROJECT_SCOPE.md"
-  ]
+  "ignores": ["docs/PROJECT_SCOPE.md"]
 }

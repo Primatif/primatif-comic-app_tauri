@@ -13,23 +13,23 @@ These standards build upon the general principles defined in `/.gemini/standards
 
 - **Directory Structure**: Components are organized by feature under `src/components/`. Each feature directory contains the main component, an `index.ts` for clean exports, and subdirectories for sub-components and utilities.
 
-    ```txt
-    components/
-    └── FeatureName/
-        ├── FeatureName.tsx
-        ├── index.ts
-        └── SubComponent/
-    ```
+  ```txt
+  components/
+  └── FeatureName/
+      ├── FeatureName.tsx
+      ├── index.ts
+      └── SubComponent/
+  ```
 
 - **Decomposition**: Favor small, single-responsibility components composed together over large, monolithic components.
 - **Exports**: Use `index.ts` files to create a clean public API for each component directory. Consumers should import from the directory, not the specific file.
 
-    ```typescript
-    // ✅ Do this
-    import { MyComponent } from 'components/MyComponent';
-    // ❌ Not this
-    import { MyComponent } from 'components/MyComponent/MyComponent';
-    ```
+  ```typescript
+  // ✅ Do this
+  import { MyComponent } from "components/MyComponent";
+  // ❌ Not this
+  import { MyComponent } from "components/MyComponent/MyComponent";
+  ```
 
 ## 2. State Management
 

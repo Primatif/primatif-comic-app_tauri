@@ -4,15 +4,16 @@ purpose: "Defines the foundational principles, scope, and top-level operational 
 modification_date: "2025-07-21"
 tags: ["root", "core", "project-guidelines", "index"]
 ---
+
 # AI Constitution & Core Directives
 
 This document sets the foundational rules for AI interaction within this project. All other `GEMINI.md` files build upon and must cohere with the principles defined here.
 
 ## 1. Project Overview
 
-*   **Project Name**: To be defined.
-*   **Purpose**: To be defined.
-*   **Primary Technologies**: To be defined.
+- **Project Name**: To be defined.
+- **Purpose**: To be defined.
+- **Primary Technologies**: To be defined.
 
 ## 2. AI Core Directives
 
@@ -40,8 +41,8 @@ These are the fundamental principles governing all AI actions.
 
 This table serves as the top-level index for all project context. Use it to navigate to the correct category for any given task.
 
-| Category Directory | Purpose & Scope                                                              |
-| :----------------- | :--------------------------------------------------------------------------- |
+| Category Directory | Purpose & Scope                                                                |
+| :----------------- | :----------------------------------------------------------------------------- |
 | `standards/`       | Contains all coding, documentation, and operational standards for the project. |
 | `documentation/`   | (Example) Defines rules and structure for user and developer documentation.    |
 | `workflows/`       | (Example) Describes common developer workflows, like debugging or releases.    |

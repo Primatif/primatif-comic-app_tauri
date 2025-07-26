@@ -1,6 +1,3 @@
 {
-  "markdownlint.lintWorkspaceGlobs": [
-    "**/*.md",
-    "!docs/PROJECT_SCOPE.md"
-  ]
+  "markdownlint.lintWorkspaceGlobs": ["**/*.md", "!docs/PROJECT_SCOPE.md"]
 }

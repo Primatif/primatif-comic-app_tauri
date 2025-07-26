@@ -2,8 +2,10 @@
 name: "Core Application Architecture"
 purpose: "Defines the fundamental architectural patterns governing the interaction between the frontend and backend."
 modification_date: "2025-07-24"
-tags: ["architecture", "frontend-backend-interaction", "performance", "decoupling"]
+tags:
+  ["architecture", "frontend-backend-interaction", "performance", "decoupling"]
 ---
+
 # Core Application Architecture Standards
 
 This document outlines the core architectural principles that govern the structure of the application and the interaction between the frontend and backend components. Adherence to these patterns is critical for ensuring performance, maintainability, and future flexibility.
