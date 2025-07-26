@@ -41,3 +41,5 @@ Refer to the table below to find the relevant guidelines for a particular task. 
 | `error_handling/`    | Defines standards for handling errors differently across various environments.          |
 | `frontend_specific/` | Contains standards for frontend development, including component structure and styling. |
 | `backend_specific/`  | Contains standards for backend development, including API design and data modeling.     |
+| `tooling/`           | Defines the standard tooling and commands for the project.                              |
+| `tooling/`           | Defines the standard tooling and commands for the project.                              |
