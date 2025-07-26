@@ -10,6 +10,7 @@
     "build": "vite build",
     "serve": "vite preview",
     "tauri": "tauri",
+    "tauri:build": "tauri build",
     "format": "prettier --write .",
     "lint:md:fix": "markdownlint-cli2 --fix"
   },
