@@ -1,9 +1,10 @@
+2025-07-24 18:30 | Dev Environment Setup | Migrated project package management to Bun, updated documentation to reflect this change, and enhanced code quality tooling by integrating Prettier for general formatting and markdownlint-cli2 for Markdown-specific linting with auto-fix capabilities. Discussed the roles of formatters vs. linters. Addressed and resolved a specific MD030 Markdown linting issue in .gemini/GEMINI.md. Confirmed the basic SolidJS placeholder application is running correctly, establishing a solid foundation for continued development towards sprint goals.
+
 2025-07-23 01:03 | Project Relaunch and V1 Development | This project has been relaunched in a new repository with a new technology stack (Tauri, Rust, SolidJS) to move from a prototype to a production-grade application. The goals for this new version are defined in the PROJECT_SCOPE.md document. This marks the official start of Version 1 development.
 
 2025-03-24 03:46 | Modularize script generation components | Separated script generation functionality into dedicated components to improve code organization and maintainability. This makes it easier to extend AI script generation features in the future.
 
 2025-03-24 03:49 | Relocate the instructions modal | Moved the instructions modal to its own directory for better code organization and to follow the component-based architecture pattern.
-
 2025-03-24 03:52 | Refactor preview modal | Restructured the preview modal code to prepare for the upcoming split between AI preview and export preview functionality.
 
 2025-03-24 03:53 | Refactor controls | Improved the organization of control components, making the UI more intuitive and preparing for additional export options.
