@@ -18,6 +18,7 @@
   "license": "PolyForm Strict License 1.0.0",
   "dependencies": {
     "@tauri-apps/api": "^2",
+    "@tauri-apps/plugin-log": "^2.6.0",
     "@tauri-apps/plugin-opener": "^2",
     "solid-js": "^1.9.3"
   },

@@ -9,6 +9,7 @@ use rusqlite::Connection;
 use std::fs;
 use std::sync::{Arc, Mutex};
 use tauri::Manager;
+use tauri_plugin_log::{Target, TargetKind};
 
 pub mod commands;
 pub mod database;
@@ -18,9 +19,9 @@ pub mod models;
 /**
  * The main entry point for the Tauri application.
  *
- * This function initializes the Tauri application, sets up the database connection,
- * initializes the database schema, and registers the backend commands that can be
- * invoked from the frontend.
+ * This function initializes the Tauri application, including logging, sets up the
+ * database connection, initializes the database schema, and registers the backend
+ * commands that can be invoked from the frontend.
  *
  * # Returns
  *
@@ -30,8 +31,23 @@ pub mod models;
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(
+            tauri_plugin_log::Builder::default()
+                .targets([
+                    Target::new(TargetKind::Webview),
+                    Target::new(TargetKind::Stdout),
+                    Target::new(TargetKind::LogDir { file_name: Some("PrimatifComics.log".into()) }),
+                ])
+                .level(if cfg!(debug_assertions) {
+                    log::LevelFilter::Debug
+                } else {
+                    log::LevelFilter::Info
+                })
+                .build(),
+        )
         .plugin(tauri_plugin_opener::init())
         .setup(|app| {
+            log::info!("Application setup started.");
             let db_path = app
                 .path()
                 .resolve("app.db", tauri::path::BaseDirectory::AppLocalData)

@@ -27,3 +27,11 @@
   - The automated performance benchmark test passes, confirming the application meets the required FPS target under stress.
   - A clear data pipeline exists between the Wasm engine and the Pixi.js renderer.
   - The system demonstrably uses hardware acceleration (WebGL/WebGPU) via Pixi.js.
+
+## Log File Rolling and Retention
+
+- **Description**: Implement a log file rolling and retention strategy for the `tauri-plugin-log` to manage disk space and simplify log analysis. This involves configuring log files to automatically roll over based on size and ensuring that only a specified number of recent log files are retained.
+- **Acceptance Criteria**:
+  - Log files automatically roll over to a new file when the current log file reaches a predefined size (e.g., 20KB).
+  - A maximum of 4 log files are maintained at any given time.
+  - Older log files are automatically deleted to adhere to the retention limit.

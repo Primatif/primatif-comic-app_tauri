@@ -6,6 +6,7 @@
  * for easy communication with the frontend.
  */
 
+use log::error;
 use serde::Serialize;
 use thiserror::Error;
 
@@ -51,6 +52,7 @@ impl From<rusqlite::Error> for AppError {
      * Converts a `rusqlite::Error` into an `AppError::Database`.
      */
     fn from(err: rusqlite::Error) -> Self {
+        error!("Database error: {:?}", err);
         AppError::Database(err.to_string())
     }
 }
@@ -60,6 +62,7 @@ impl From<std::io::Error> for AppError {
      * Converts a `std::io::Error` into an `AppError::FileSystem`.
      */
     fn from(err: std::io::Error) -> Self {
+        error!("File system error: {:?}", err);
         AppError::FileSystem(err.to_string())
     }
 }

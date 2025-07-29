@@ -18,6 +18,10 @@ Good code should be self-explanatory about *what* it is doing. Comments should f
 - **Bad (Restates the code):** `// Increment the counter`
 - **Good (Explains the purpose):** `// We increment here to account for an off-by-one error from the legacy API.`
 
+## 2. Documentation Maintenance: Always Keep Current
+
+All in-code documentation (rustdoc, TSDoc, etc.) **must** be updated concurrently with any code modifications. This ensures that the documentation accurately reflects the current state and behavior of the codebase, preventing stale or misleading information.
+
 ## 2. Language-Specific Standards
 
 ### Rust: `rustdoc`
