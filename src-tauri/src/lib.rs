@@ -6,6 +6,7 @@
  */
 
 use rusqlite::Connection;
+use std::fs;
 use std::sync::{Arc, Mutex};
 use tauri::Manager;
 
@@ -35,6 +36,12 @@ pub fn run() {
                 .path()
                 .resolve("app.db", tauri::path::BaseDirectory::AppLocalData)
                 .expect("failed to resolve app db path");
+
+            // Ensure the directory for the database file exists
+            if let Some(parent_dir) = db_path.parent() {
+                fs::create_dir_all(parent_dir)
+                    .expect("failed to create database directory");
+            }
 
             let conn = Connection::open(&db_path).expect("failed to open database");
             let db_manager = database::DatabaseManager::new(db_path.to_str().unwrap())
