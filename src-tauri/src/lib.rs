@@ -1,14 +1,56 @@
-// Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-#[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
-}
+/*!
+ * The main library for the Primatif Comics Tauri application.
+ *
+ * This crate handles the core backend logic, including database interactions,
+ * error handling, and exposing commands to the frontend.
+ */
 
+use rusqlite::Connection;
+use std::sync::{Arc, Mutex};
+use tauri::Manager;
+
+pub mod commands;
+pub mod database;
+pub mod errors;
+pub mod models;
+
+/**
+ * The main entry point for the Tauri application.
+ *
+ * This function initializes the Tauri application, sets up the database connection,
+ * initializes the database schema, and registers the backend commands that can be
+ * invoked from the frontend.
+ *
+ * # Returns
+ *
+ * This function does not return. It will panic if there is an unrecoverable error
+ * during application setup or execution.
+ */
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![greet])
+        .setup(|app| {
+            let db_path = app
+                .path()
+                .resolve("app.db", tauri::path::BaseDirectory::AppLocalData)
+                .expect("failed to resolve app db path");
+
+            let conn = Connection::open(&db_path).expect("failed to open database");
+            let db_manager = database::DatabaseManager::new(db_path.to_str().unwrap())
+                .expect("failed to create db manager");
+            db_manager
+                .initialize_schema()
+                .expect("failed to initialize schema");
+
+            app.manage(Arc::new(Mutex::new(conn)));
+
+            Ok(())
+        })
+        .invoke_handler(tauri::generate_handler![
+            commands::get_message,
+            commands::update_message
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

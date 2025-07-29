@@ -35,18 +35,19 @@
 
 **Intent:** To build the backend's foundation, focusing on data persistence and establishing a clean, error-handling API that the frontend will communicate with.
 
-- [ ] **Database Integration**:
-  - **Action**: Integrate `rusqlite` into the Rust backend. Create a simple `messages` table with a `text` column.
+- [x] **Database Integration**:
+  - **Action**: Integrated `rusqlite` into the Rust backend. Created a `database` module containing a `schema.sql` file for the `messages` table and a `mod.rs` for the `DatabaseManager`.
+  - **Notes**: This involved adding the `rusqlite` and `thiserror` dependencies to `Cargo.toml`. We encountered and fixed a feature flag issue, changing `features = ["sql"]` to the correct `features = ["bundled"]` for `rusqlite` to ensure SQLite is included with the crate. The `DatabaseManager` was set up to handle connection and schema initialization.
   - **Reasoning**: This sets up the application's persistence layer, providing a single source of truth for all data, as mandated by the "Authoritative Backend" architectural principle.
 
-- [ ] **Implement Serializable Result Type**:
-  - **Action**: Create a custom, serializable `AppResult<T>` type in Rust.
+- [x] **Implement Serializable Result Type**:
+  - **Action**: Created a custom, serializable `AppError` enum and `Result<T>` type alias in a new `errors.rs` module.
+  - **Notes**: Initially, the `AppError` enum was not serializable, causing compilation errors when used in Tauri commands. This was resolved by adding `#[derive(Serialize)]` and implementing `From` traits to convert `rusqlite::Error` and `std::io::Error` into our custom `AppError::Database` and `AppError::FileSystem` variants, which now hold `String` representations of the errors. This makes the error type compatible with the frontend.
   - **Reasoning**: This is a critical step for robust error handling. It ensures that the frontend can reliably distinguish between successful operations and backend errors, allowing for clean `try...catch` blocks in the JavaScript code.
 
-- [ ] **Create Initial Tauri Commands**:
-  - **Action**: Implement two commands:
-    1. `get_message`: Retrieves the current message from the database.
-    2. `update_message`: Accepts a string from the frontend and saves it to the database.
+- [x] **Create Initial Tauri Commands**:
+  - **Action**: Implemented `get_message` and `update_message` in a new `commands.rs` module. The main `lib.rs` was updated to manage the database connection state and register these new commands.
+  - **Notes**: We ran into several module resolution issues (`undeclared module`). These were fixed by adding `pub mod <module_name>;` declarations to `lib.rs` for the `database`, `errors`, `models`, and `commands` modules. A `cargo check` was run to confirm the compiler could resolve all paths correctly, which also helped the IDE's language server (`rust-analyzer`) to sync up.
   - **Reasoning**: These commands form the initial "View-Agnostic API." They are the stable contract the frontend will use, ensuring a clear separation of concerns.
 
 ---
