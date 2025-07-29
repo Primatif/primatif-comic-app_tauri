@@ -13,3 +13,4 @@ This file serves as a directory to all specific workflow guides.
 | :-------------- | :----------------------------------------------------------- |
 | `debugging/`    | Procedures for debugging different parts of the application. |
 | `releases/`     | Steps for releasing a new version of the application.        |
+| `initial_session/`| Procedure for understanding project context at the start of a new chat session. |
