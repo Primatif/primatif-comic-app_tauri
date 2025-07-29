@@ -38,6 +38,7 @@ Refer to the table below to find the relevant guidelines for a particular task. 
 | `architecture/`      | Defines core patterns for frontend-backend interaction, performance, and decoupling.    |
 | `branching_ci_cd/`   | Defines the Git branching model, CI/CD pipeline standards, and deployment protocols.    |
 | `commit_messages/`   | Specifies the format and style for writing clear and conventional commit messages.      |
+| `code_documentation/`| Defines standards for in-code documentation (comments) using rustdoc and TSDoc.         |
 | `error_handling/`    | Defines standards for handling errors differently across various environments.          |
 | `frontend_specific/` | Contains standards for frontend development, including component structure and styling. |
 | `backend_specific/`  | Contains standards for backend development, including API design and data modeling.     |
