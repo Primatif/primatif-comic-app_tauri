@@ -56,15 +56,17 @@
 
 **Intent:** To integrate a robust logging system early in the development process. This ensures that we have visibility into the application's behavior from the very beginning, making debugging and verification easier.
 
-- [ ] **Integrate `tauri-plugin-log`**:
-  - **Action**: Add the `tauri-plugin-log` to the project and initialize it in `main.rs`. Configure it for structured JSON output and rolling files.
-  - **Reasoning**: This provides a unified logging solution for both the frontend and backend, which is a Tauri best practice. Structured JSON logs are machine-parsable and essential for future analysis, while rolling files prevent log data from growing indefinitely.
+- [x] **Integrate `tauri-plugin-log`**:
+  - **Action**: Added the `tauri-plugin-log` to the project and initialized it in `src-tauri/src/lib.rs`.
+  - **Notes**: The plugin was configured to output logs to the `Webview`, `Stdout`, and a `LogDir` with a specific file name (`PrimatifComics.log`). The log level is dynamically set to `Debug` in development builds and `Info` in release builds. While the initial proposal mentioned structured JSON output and rolling files, `tauri-plugin-log` does not natively support structured JSON, and advanced rolling file strategies (beyond `KeepOne` or `KeepAll`) are not directly supported. A backlog item has been created for future implementation of a more robust log file rolling and retention strategy.
+  - **Reasoning**: This provides a unified logging solution for both the frontend and backend, which is a Tauri best practice. It ensures early visibility into application behavior.
 
-- [ ] **Implement Initial Log Points**:
+- [x] **Implement Initial Log Points**:
   - **Action**:
-    - **Backend**: Add an `info!` log in `main.rs` to signal that the application is starting.
-    - **Backend**: Add an `info!` log to the `update_message` command to record when it's called.
-  - **Reasoning**: These initial logs serve as a simple, immediate test to verify that the logging system is correctly configured and capturing events from the Rust backend.
+    - **Backend**: Added an `info!` log in `src-tauri/src/lib.rs` (`setup` closure) to signal that the application is starting.
+    - **Backend**: Added `error!` logs in `src-tauri/src/errors.rs` within the `From` implementations for `rusqlite::Error` and `std::io::Error` to capture and log database and file system errors when they are converted to `AppError`.
+  - **Notes**: The `update_message` command log point was not implemented at this stage, as the command's full integration with the frontend will occur in a later step (Step 4).
+  - **Reasoning**: These initial logs serve as a simple, immediate test to verify that the logging system is correctly configured and capturing events from the Rust backend, and provide crucial debugging information for errors.
 
 ---
 
