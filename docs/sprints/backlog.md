@@ -2,39 +2,28 @@
 
 ## Over-the-Air Updates (Tauri Updater)
 
-- [ ] **Configure Tauri Updater**:
-  - [ ] Enable and configure the `updater` in `tauri.conf.json`.
-  - [ ] Define the update endpoints and public key for signature verification.
-- [ ] **CI/CD Pipeline for Updates**:
-  - [ ] Extend the `main-branch.yml` workflow to generate and sign update artifacts for all target platforms (macOS, Windows, Linux).
-  - [ ] Ensure the workflow correctly publishes the update artifacts (JSON metadata, signatures, and application bundles) to a location accessible by the application (e.g., GitHub Releases or a dedicated update server).
-- [ ] **Frontend Update UI**:
-  - [ ] Implement a basic UI in the SolidJS frontend to notify the user when an update is available.
-  - [ ] Provide buttons to allow the user to accept and install the update, or to dismiss the notification.
-  - [ ] Use Tauri's updater API (`@tauri-apps/api/updater`) to check for updates and handle the update process.
-- [ ] **Acceptance Criteria**:
-  - [ ] The application, when installed, can successfully check for updates from a remote server.
-  - [ ] When a new version is released via the CI/CD pipeline, the application detects it and prompts the user.
-  - [ ] The user can successfully download and install the update through the in-app UI.
+- **Description**: Implement a system for delivering updates to users automatically. This is crucial for ensuring users have the latest features and bug fixes without manual intervention, improving the user experience and maintenance efficiency.
+- **Acceptance Criteria**:
+  - The application can detect when a new version is available.
+  - The user is prompted to download and install the update.
+  - The update process completes successfully.
 
-## Backend Undo/Redo System (Command Pattern)
+## Backend Undo/Redo System
 
-- [ ] **Core Command Trait**:
-  - [ ] Define a generic `Command` trait in Rust that includes `execute` and `undo` methods. The `execute` method will apply the change, and the `undo` method will revert it.
-  - [ ] Both methods will take a mutable reference to the application's state (e.g., `&mut AppState`) to perform their operations.
-- [ ] **History Manager**:
-  - [ ] Create a `HistoryManager` struct to manage the undo/redo stacks.
-  - [ ] It will hold two vectors: `undo_stack: Vec<Box<dyn Command>>` and `redo_stack: Vec<Box<dyn Command>>`.
-  - [ ] Implement a method to `execute_command`, which applies a new command, moves it to the `undo_stack`, and clears the `redo_stack`.
-  - [ ] Implement `undo` and `redo` methods that move commands between the stacks and call the appropriate methods on the command objects.
-- [ ] **Concrete Command Implementation**:
-  - [ ] Create a simple, concrete command for a basic action, such as `UpdateMessageCommand`.
-  - [ ] This command will store the old and new values of the message. Its `execute` method will set the new value, and its `undo` method will restore the old value.
-- [ ] **Tauri Integration**:
-  - [ ] Integrate the `HistoryManager` into the Tauri application state.
-  - [ ] Create new Tauri commands (`undo`, `redo`) that call the corresponding methods on the `HistoryManager`.
-  - [ ] Modify the existing `update_message` command to use the `HistoryManager` to execute the `UpdateMessageCommand` instead of changing the state directly.
-- [ ] **Acceptance Criteria**:
-  - [ ] The user can perform an action (e.g., update the message).
-  - [ ] The user can then trigger the `undo` command, and the application state correctly reverts to its previous condition.
-  - [ ] The user can then trigger the `redo` command, and the application state correctly returns to the state after the initial action.
+- **Description**: Implement a robust undo/redo functionality for user actions. This is a fundamental feature for any editor, providing a safety net that allows users to experiment and easily correct mistakes, leading to a more forgiving and productive user experience.
+- **Acceptance Criteria**:
+  - User actions that modify the application's state can be undone.
+  - Undone actions can be redone.
+  - The undo/redo history is cleared when a new, conflicting action is taken.
+
+## High-Performance Rendering with Wasm and Pixi.js
+
+- **Description**: Integrate a Rust-based WebAssembly (Wasm) engine with Pixi.js to handle complex rendering tasks. The Wasm engine will manage and process complex rendering data for better performance, while Pixi.js will render the DOM using WebGPU and WebGL. This architecture will ensure a smooth, responsive UI, especially for large or intricate comic panels.
+- **Subtask: Performance Validation Framework**: To ensure the 60 FPS target is met and maintained, a two-part validation framework will be implemented for the canvas area:
+  - **1. Observable Metric**: A simple, toggleable FPS counter will be displayed over the canvas to provide real-time visual feedback during development.
+  - **2. Automated Benchmark Test**: A new test will be created to simulate a high-stress rendering scenario (e.g., rendering and animating 100+ complex objects). This test will run for a fixed duration, calculate the average FPS, and fail if the result is below the acceptable threshold (e.g., 55 FPS), preventing performance regressions.
+- **Acceptance Criteria**:
+  - The application's rendering performance can be manually verified at any time using the observable FPS counter.
+  - The automated performance benchmark test passes, confirming the application meets the required FPS target under stress.
+  - A clear data pipeline exists between the Wasm engine and the Pixi.js renderer.
+  - The system demonstrably uses hardware acceleration (WebGL/WebGPU) via Pixi.js.
