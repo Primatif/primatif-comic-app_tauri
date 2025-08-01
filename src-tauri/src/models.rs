@@ -14,12 +14,8 @@ use serde::{Deserialize, Serialize};
  */
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Message {
-    /**
-     * The unique identifier for the message.
-     */
     pub id: i32,
-    /**
-     * The textual content of the message.
-     */
     pub text: String,
+    pub x: f64,
+    pub y: f64,
 }

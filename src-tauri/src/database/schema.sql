@@ -1,4 +1,6 @@
 CREATE TABLE IF NOT EXISTS messages (
     id INTEGER PRIMARY KEY NOT NULL,
-    text TEXT NOT NULL
+    text TEXT NOT NULL,
+    x REAL NOT NULL,
+    y REAL NOT NULL
 );

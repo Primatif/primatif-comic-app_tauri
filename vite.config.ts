@@ -1,7 +1,12 @@
 import { defineConfig } from "vite";
 import solid from "vite-plugin-solid";
+import path from "path";
+import { fileURLToPath } from "url";
 
-// @ts-expect-error process is a nodejs global
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// *@ts-expect-error process is a nodejs global
 const host = process.env.TAURI_DEV_HOST;
 
 // https://vitejs.dev/config/
@@ -28,5 +33,15 @@ export default defineConfig(async () => ({
       // 3. tell vite to ignore watching `src-tauri`
       ignored: ["**/src-tauri/**"],
     },
+  },
+  resolve: {
+    conditions: ["development", "browser"],
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+      "@tauri-apps/api": path.resolve(__dirname, "node_modules/@tauri-apps/api"),
+    },
+  },
+  optimizeDeps: {
+    exclude: ["@tauri-apps/api"],
   },
 }));

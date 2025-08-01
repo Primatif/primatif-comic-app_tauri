@@ -17,16 +17,23 @@
   },
   "license": "PolyForm Strict License 1.0.0",
   "dependencies": {
+    "@kobalte/core": "^0.13.11",
     "@tauri-apps/api": "^2",
     "@tauri-apps/plugin-log": "^2.6.0",
     "@tauri-apps/plugin-opener": "^2",
+    "install": "^0.13.0",
     "solid-js": "^1.9.3"
   },
   "devDependencies": {
+    "@kobalte/tailwindcss": "^0.9.0",
+    "@tailwindcss/vite": "^4.1.11",
     "@tauri-apps/cli": "^2",
     "@types/bun": "latest",
+    "autoprefixer": "^10.4.21",
     "markdownlint-cli2": "^0.13.0",
+    "postcss": "^8.5.6",
     "prettier": "^3.6.2",
+    "tailwindcss": "^4.1.11",
     "typescript": "~5.6.2",
     "vite": "^7.0.6",
     "vite-plugin-solid": "^2.11.7"
