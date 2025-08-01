@@ -18,6 +18,7 @@
   "license": "PolyForm Strict License 1.0.0",
   "dependencies": {
     "@kobalte/core": "^0.13.11",
+    "@tailwindcss/postcss": "^4.1.11",
     "@tauri-apps/api": "^2",
     "@tauri-apps/plugin-log": "^2.6.0",
     "@tauri-apps/plugin-opener": "^2",

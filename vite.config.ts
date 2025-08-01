@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import solid from "vite-plugin-solid";
+import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -10,8 +11,9 @@ const __dirname = path.dirname(__filename);
 const host = process.env.TAURI_DEV_HOST;
 
 // https://vitejs.dev/config/
+// For Tailwind CSS v4, the tailwindcss plugin should be loaded before solid
 export default defineConfig(async () => ({
-  plugins: [solid()],
+  plugins: [tailwindcss(), solid()],
 
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
   //
@@ -44,4 +46,6 @@ export default defineConfig(async () => ({
   optimizeDeps: {
     exclude: ["@tauri-apps/api"],
   },
+  // Tailwind v4 with @tailwindcss/vite doesn't require postcss config
+  css: {},
 }));

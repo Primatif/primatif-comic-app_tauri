@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
+  // In Tailwind v4, explicit content paths are needed
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -7,7 +8,12 @@ module.exports = {
   theme: {
     extend: {},
   },
+  // Add Kobalte support using dynamic import for ES module compatibility
   plugins: [
-    require('@kobalte/tailwindcss'),
+    // Load the Kobalte plugin (must be defined as a function for ES modules)
+    async () => {
+      const kobalte = await import('@kobalte/tailwindcss');
+      return kobalte.default;
+    }
   ],
 };
