@@ -10,56 +10,35 @@ These standards extend `/.gemini/standards/GEMINI.md` with specific conventions 
 
 ## 1. Component Architecture
 
-- **Directory Structure**: Components are organized by feature under `src/components/`. Each feature directory contains the main component, an `index.ts` for exports, and subdirectories for sub-components/utilities.
-
-  ```txt
-  components/
-  └── FeatureName/
-      ├── FeatureName.tsx
-      ├── index.ts
-      └── SubComponent/
-  ```
-
-- **Decomposition**: Favor small, single-responsibility components.
-- **Exports**: Use `index.ts` for clean public API. Import from directory, not specific file.
-
-  ```typescript
-  // ✅ Do this
-  import { MyComponent } from "components/MyComponent";
-  // ❌ Not this
-  import { MyComponent } from "components/MyComponent/MyComponent";
-  ```
+- **Summary**: Defines directory structure, decomposition principles, and export conventions for components.
+- **For detailed explanation and examples**: Refer to `/.gemini/standards/frontend_specific/details/component_architecture.md`.
 
 ## 2. State Management
 
-- **Local State First**: Use SolidJS signals (`createSignal`) for component-local state.
-- **Custom Hooks/Primitives**: Extract complex/reusable state logic into custom primitives (e.g., `createMyLogic`).
-- **Global State**: Use SolidJS stores (`createStore`) for shared state across unrelated components. Define global stores in `src/stores/`.
+- **Summary**: Outlines the use of SolidJS signals for local state, custom hooks for reusable logic, and stores for global state.
+- **For detailed explanation**: Refer to `/.gemini/standards/frontend_specific/details/state_management.md`.
 
 ## 3. Type Safety (TypeScript)
 
-- **Focused Interfaces**: Define single-purpose interfaces for props, API responses, and data models.
-- **Composition**: Use type composition (`&` and `|`) to build complex types.
-- **TSDoc**: Document all exported components, interfaces, and types using TSDoc.
+- **Summary**: Covers focused interfaces, type composition, and TSDoc for robust type safety.
+- **For detailed explanation**: Refer to `/.gemini/standards/frontend_specific/details/type_safety.md`.
 
 ## 4. Styling
 
-Primarily use Tailwind CSS utility classes. For custom styles, define in `src/App.css` or component-specific CSS modules (e.g., BEM). Define design tokens (colors, spacing, typography) in `tailwind.config.js`.
+- **Summary**: Primarily uses Tailwind CSS, with guidelines for custom styles and design tokens.
+- **For detailed explanation**: Refer to `/.gemini/standards/frontend_specific/details/styling.md`.
 
 ## 5. HTML & Accessibility
 
-- **Semantic HTML**: Use semantic HTML5 elements (`<article>`, `<nav>`, `<section>`) for UI structure.
-- **Element Identification**: Interactive/key elements must have unique `id` and `data-testid`.
-  - **Convention**: `component-name-element-purpose` (e.g., `id="login-form-submit-button"`).
-- **Accessibility**: Adhere to WCAG standards (keyboard navigation, screen reader, high-contrast).
+- **Summary**: Emphasizes semantic HTML, unique element identification, and adherence to WCAG standards.
+- **For detailed explanation**: Refer to `/.gemini/standards/frontend_specific/details/html_accessibility.md`.
 
 ## 5. Error Handling
 
-- **Error Boundaries**: Wrap major UI features in SolidJS `<ErrorBoundary>` to prevent app crashes.
-- **Graceful Degradation**: Handle missing/loading data gracefully using `<Show>`, `<For>`, `<Switch>` for empty states or loading indicators.
+- **Summary**: Focuses on error boundaries and graceful degradation for a robust user experience.
+- **For detailed explanation**: Refer to `/.gemini/standards/frontend_specific/details/error_handling.md`.
 
 ## 6. Anti-Patterns to Avoid
 
-- **Monolithic Components**: Break down large components.
-- **Prop Drilling**: Use stores or context for deep data needs.
-- **Inline Styles**: Use Tailwind CSS. Avoid `style` attribute.
+- **Summary**: Lists common anti-patterns like monolithic components, prop drilling, and inline styles.
+- **For detailed explanation**: Refer to `/.gemini/standards/frontend_specific/details/anti_patterns.md`.

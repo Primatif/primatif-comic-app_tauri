@@ -11,17 +11,10 @@ This document outlines core architectural principles for the application's struc
 
 ## 1. Responsive UI & Authoritative Backend
 
-This pattern ensures responsive UI and data integrity.
+This pattern ensures a highly responsive user interface while maintaining data integrity.
 
-- **Frontend (Real-time Interaction Loop):** The frontend (e.g., SolidJS) handles all real-time user interactions (dragging, resizing, drawing).
-  - It uses temporary local UI state for a fluid 60fps experience.
-  - This local state is **non-authoritative** and optimized for rendering.
-  - No backend calls occur during high-frequency events (e.g., `onMouseMove`).
-
-- **Backend (Authoritative Update Loop):** The Rust backend is the single source of truth.
-  - Frontend sends final user action states (e.g., `onMouseUp`) to the backend via Tauri commands.
-  - Backend validates data, performs business logic, and persists the **authoritative** state.
-  - This ensures data integrity and robustness.
+- **Summary**: The frontend manages real-time, non-authoritative UI state for fluid interaction, while the backend acts as the authoritative source of truth, validating and persisting final user actions.
+- **For detailed explanation and examples**: Refer to `/.gemini/standards/architecture/patterns/responsive_ui_pattern.md`.
 
 ## 2. View-Agnostic Backend
 

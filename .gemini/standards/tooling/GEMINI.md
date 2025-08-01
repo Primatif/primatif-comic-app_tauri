@@ -10,34 +10,15 @@ This document outlines standard tools and commands for project consistency and p
 
 ## 1. Primary Toolkit: Bun
 
-Bun is the official toolkit for package management, script execution, and testing. Use it for a simple, fast, consistent development environment.
+- **Summary**: Bun is the official toolkit for package management, script execution, and testing.
+- **For detailed explanation**: Refer to `/.gemini/standards/tooling/details/primary_toolkit_bun.md`.
 
 ## 2. Package Management
 
-Manage all frontend dependencies with Bun.
-
-- **Install:** `bun install`
-- **Add:** `bun add <package-name>`
-- **Add Dev:** `bun add -d <package-name>`
-- **Remove:** `bun remove <package-name>`
-
-`bun.lockb` is the single source of truth for dependency versions and must be committed.
+- **Summary**: All frontend dependencies are managed with Bun, including installation, adding, and removing packages.
+- **For detailed explanation**: Refer to `/.gemini/standards/tooling/details/bun_package_management.md`.
 
 ## 3. Script Execution
 
-Execute all `package.json` scripts using Bun. Do not use `npm run` or `yarn`.
-
-- **Standard:** `bun run <script-name>`
-- **Shorthand:** For `dev`, `build`, `test`, `start`, omit `run`: `bun <script-name>`
-
-### Examples
-
-| Instead of...      | Use...             |
-| :----------------- | :----------------- |
-| `npm install`      | `bun install`      |
-| `npm run dev`      | `bun dev`          |
-| `npm run build`    | `bun build`        |
-| `npm test`         | `bun test`         |
-| `npm run format`   | `bun run format`   |
-
-Adhering to this standard ensures Bun's performance benefits and efficient CI/CD.
+- **Summary**: All `package.json` scripts are executed using Bun, with standard and shorthand commands.
+- **For detailed explanation and examples**: Refer to `/.gemini/standards/tooling/details/bun_script_execution.md`.
