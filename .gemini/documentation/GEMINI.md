@@ -1,7 +1,6 @@
 ---
 name: "Documentation Index"
 purpose: "Provides a table of contents for all documentation-related guidelines."
-modification_date: "2025-07-21"
 tags: ["documentation", "index"]
 ---
 

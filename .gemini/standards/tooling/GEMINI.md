@@ -1,35 +1,34 @@
 ---
 name: "Tooling Standards"
-purpose: "Defines the standard tooling and commands for the project, including package management and script execution."
-modification_date: "2025-07-26"
+purpose: "Defines standard tooling and commands for the project."
 tags: ["tooling", "bun", "scripts", "package-management"]
 ---
 
 # Tooling Standards
 
-This document outlines the standard tools and commands to be used across the project to ensure consistency and leverage the performance benefits of our chosen toolchain.
+This document outlines standard tools and commands for project consistency and performance.
 
 ## 1. Primary Toolkit: Bun
 
-Bun is the official toolkit for this project. It should be used for package management, script execution, and testing to maintain a simple, fast, and consistent development environment.
+Bun is the official toolkit for package management, script execution, and testing. Use it for a simple, fast, consistent development environment.
 
 ## 2. Package Management
 
-All frontend dependencies must be managed using Bun.
+Manage all frontend dependencies with Bun.
 
-- **Installing dependencies:** `bun install`
-- **Adding a dependency:** `bun add <package-name>`
-- **Adding a development dependency:** `bun add -d <package-name>`
-- **Removing a dependency:** `bun remove <package-name>`
+- **Install:** `bun install`
+- **Add:** `bun add <package-name>`
+- **Add Dev:** `bun add -d <package-name>`
+- **Remove:** `bun remove <package-name>`
 
-The `bun.lockb` file is the single source of truth for dependency versions and must be committed to version control.
+`bun.lockb` is the single source of truth for dependency versions and must be committed.
 
 ## 3. Script Execution
 
-All scripts defined in `package.json` must be executed using Bun. Do not use `npm run` or `yarn`.
+Execute all `package.json` scripts using Bun. Do not use `npm run` or `yarn`.
 
-- **Standard syntax:** `bun run <script-name>`
-- **Shorthand syntax:** For common scripts (`dev`, `build`, `test`, `start`), the `run` keyword can be omitted: `bun <script-name>`
+- **Standard:** `bun run <script-name>`
+- **Shorthand:** For `dev`, `build`, `test`, `start`, omit `run`: `bun <script-name>`
 
 ### Examples
 
@@ -41,4 +40,4 @@ All scripts defined in `package.json` must be executed using Bun. Do not use `np
 | `npm test`         | `bun test`         |
 | `npm run format`   | `bun run format`   |
 
-Adhering to this standard ensures that all developers benefit from Bun's performance and that our CI/CD pipelines are simple and efficient.
+Adhering to this standard ensures Bun's performance benefits and efficient CI/CD.

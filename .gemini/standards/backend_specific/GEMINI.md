@@ -1,35 +1,34 @@
 ---
 name: "Backend Development Standards"
-purpose: "Contains standards for backend development, including API design and data modeling."
-modification_date: "2025-07-21"
+purpose: "Standards for backend development, API design, and data modeling."
 tags: ["backend", "rust", "tauri", "database"]
 ---
 
 # Backend Development Standards
 
-These standards build upon the general principles defined in `/.gemini/standards/GEMINI.md` and provide specific conventions for the Rust backend using Tauri.
+These standards extend `/.gemini/standards/GEMINI.md` with specific conventions for the Rust/Tauri backend.
 
 ## 1. Layered Architecture
 
-The backend follows a clear layered architecture to separate concerns.
+The backend uses a layered architecture for separation of concerns.
 
-- **Tauri Commands (`src/commands/`)**: The entry point for frontend-to-backend communication. These functions handle request/response serialization and delegate business logic to the service layer. They should contain minimal logic.
-- **Service Layer (`src/services/`)**: Contains the core business logic of the application. Services orchestrate data access and operations by calling repositories.
-- **Repository Layer (`src/database/` or `src/repositories/`)**: Responsible for all database interactions. The repository pattern abstracts the data source, providing a clean API for data access (e.g., `create_layout`, `find_layout_by_id`).
+- **Tauri Commands (`src/commands/`)**: Entry point for frontend-to-backend communication. Handle serialization and delegate business logic to services. Keep logic minimal.
+- **Service Layer (`src/services/`)**: Contains core business logic. Services orchestrate data access via repositories.
+- **Repository Layer (`src/database/` or `src/repositories/`)**: Handles all database interactions. Abstracts data source with a clean API (e.g., `create_layout`).
 
 ## 2. Error Handling
 
-- **Custom Error Types**: Use a custom, comprehensive error enum (e.g., `AppError`) with `thiserror` to represent all possible application errors (Database, Validation, NotFound, etc.).
-- **Result Type Alias**: Define a standard `Result<T>` type alias (e.g., `pub type Result<T> = std::result::Result<T, AppError>;`).
-- **Error Propagation**: Use the `?` operator for concise and clear error propagation up to the Tauri command handler, which will serialize the error to the frontend.
+- **Custom Error Types**: Use a custom error enum (e.g., `AppError`) with `thiserror` for all application errors (Database, Validation, NotFound, etc.).
+- **Result Type Alias**: Define `Result<T>` type alias (e.g., `pub type Result<T> = std::result::Result<T, AppError>;`).
+- **Error Propagation**: Use `?` for concise error propagation to Tauri command handlers, which serialize errors to the frontend.
 
 ## 3. Database Management
 
-- **Connection Management**: Use a managed connection pool (like `r2d2` or Tauri's managed state) to handle database connections efficiently.
-- **Migrations**: Implement a migration system to manage database schema changes versionally. Migrations should be embedded in the application and run on startup.
-- **Transactions**: Use explicit database transactions for operations that involve multiple steps to ensure data consistency. Wrap transactional logic in dedicated functions or closures.
+- **Connection Management**: Use a managed connection pool (e.g., `r2d2`) for efficient database connections.
+- **Migrations**: Implement a migration system for schema changes. Embed migrations in the app and run on startup.
+- **Transactions**: Use explicit transactions for multi-step operations to ensure data consistency. Wrap logic in dedicated functions.
 
 ## 4. Testing
 
-- **Unit Tests**: Each module should have unit tests for its logic, especially for services.
-- **Integration Tests**: Write integration tests that cover the interaction between services and the database. Use an in-memory SQLite database or a temporary test database to isolate tests.
+- **Unit Tests**: Unit tests for each module's logic, especially services.
+- **Integration Tests**: Integration tests cover service-database interaction. Use in-memory SQLite or temporary databases for isolation.

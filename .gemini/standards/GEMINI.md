@@ -1,47 +1,38 @@
 ---
 name: "Standards Index"
 purpose: "Provides a table of contents for all coding, documentation, and operational standards within the project."
-modification_date: "2025-07-21"
 tags: ["standards", "index", "principles"]
 ---
 
 # Standards Index & General Principles
 
-This file serves as a directory to all specific standards and defines the general, cross-cutting principles that apply to all code in this project.
+This file indexes specific standards and defines general, cross-cutting principles for all project code.
 
 ## 1. General Architectural Principles
 
 These principles apply to both frontend and backend development.
 
-- **Modularity**: Code should be organized into discrete, feature-based modules. This promotes separation of concerns and makes the codebase easier to navigate and maintain.
-- **Layered Architecture**: Adhere to a layered architecture (e.g., Presentation/UI -> Service/Business Logic -> Data Access). This ensures a clean separation of concerns and a clear data flow.
-- **Configuration Management**: Externalize configuration from the code. Use environment variables or configuration files with sensible defaults.
+- **Modularity**: Organize code into discrete, feature-based modules for separation of concerns and maintainability.
+- **Layered Architecture**: Adhere to a layered architecture (e.g., Presentation/UI -> Service/Business Logic -> Data Access) for clear separation and data flow.
+- **Configuration Management**: Externalize configuration from code using environment variables or configuration files with sensible defaults.
 
 ## 2. General Testing Principles
 
-- **Test Coverage**: All new features and bug fixes must be accompanied by tests. This includes unit tests for individual components/modules and integration tests for interactions between them.
-- **Test Utilities**: Create and use shared testing utilities to ensure a consistent and efficient testing environment.
-- **Isolation**: Tests should be isolated from each other and from external services. Use test databases, mocking, and stubs where appropriate.
+- **Test Coverage**: All new features and bug fixes require tests (unit and integration).
+- **Test Utilities**: Use shared testing utilities for consistent, efficient testing.
+- **Isolation**: Isolate tests from each other and external services using test databases, mocking, and stubs.
 
-## 3. General Error Handling Principles
+## 3. Specific Standards Directory
 
-- **Clarity and Consistency**: Error handling should be clear, consistent, and predictable.
-- **Graceful Failure**: The application should handle errors gracefully, preventing crashes and providing clear feedback to the user where appropriate.
-- **Specific Errors**: Use specific, custom error types/classes rather than generic ones. This allows for more precise error handling and debugging.
+Refer to the table below for task-specific guidelines, which build upon the general principles.
 
-## 4. Specific Standards Directory
-
-Refer to the table below to find the relevant guidelines for a particular task. These specific standards build upon the general principles defined above.
-
-| Topic Directory      | Description                                                                             |
-| :------------------- | :-------------------------------------------------------------------------------------- |
-| `architecture/`      | Defines core patterns for frontend-backend interaction, performance, and decoupling.    |
-| `branching_ci_cd/`   | Defines the Git branching model, CI/CD pipeline standards, and deployment protocols.    |
-| `commit_messages/`   | Specifies the format and style for writing clear and conventional commit messages.      |
-| `changelog/`         | Defines the standard format and ordering for the project's changelog file.      |
-| `code_documentation/`| Defines standards for in-code documentation (comments) using rustdoc and TSDoc.         |
-| `error_handling/`    | Defines standards for handling errors differently across various environments.          |
-| `frontend_specific/` | Contains standards for frontend development, including component structure and styling. |
-| `backend_specific/`  | Contains standards for backend development, including API design and data modeling.     |
-| `tooling/`           | Defines the standard tooling and commands for the project.                              |
-| `tooling/`           | Defines the standard tooling and commands for the project.                              |
+| Topic Directory      | Description                                                                 |
+| :------------------- | :-------------------------------------------------------------------------- |
+| `architecture/`      | Defines core patterns for frontend-backend interaction, performance, and decoupling. |
+| `branching_ci_cd/`   | Defines Git branching, CI/CD pipeline standards, and deployment protocols.  |
+| `git_workflow/`      | Defines standards for Git commit messages and changelog management.         |
+| `code_documentation/`| Defines in-code documentation standards (rustdoc, TSDoc).                   |
+| `error_handling/`    | Defines environment-aware error handling standards.                         |
+| `frontend_specific/` | Contains frontend development standards (component structure, styling).     |
+| `backend_specific/`  | Contains backend development standards (API design, data modeling).         |
+| `tooling/`           | Defines standard project tooling and commands.                              |
