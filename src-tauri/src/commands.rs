@@ -35,6 +35,23 @@ pub fn get_message(db: State<'_, Arc<Mutex<Connection>>>) -> Result<Option<Messa
     }
 }
 
+/**
+ * Inserts a new message entry into the database.
+ *
+ * This command is exposed to the frontend via Tauri's IPC mechanism.
+ * It creates a new record for the message text and its coordinates.
+ *
+ * # Arguments
+ *
+ * * `text` - The text content of the message.
+ * * `new_x` - The X coordinate of the message.
+ * * `new_y` - The Y coordinate of the message.
+ * * `db` - A Tauri `State` managed `Arc<Mutex<Connection>>` to the database connection.
+ *
+ * # Returns
+ *
+ * An `Ok(())` on success, or an `Err(AppError::Database)` if the insertion fails.
+ */
 #[tauri::command]
 pub fn update_message(text: String, new_x: f64, new_y: f64, db: State<'_, Arc<Mutex<Connection>>>) -> Result<()> {
     let conn = db.lock().unwrap();

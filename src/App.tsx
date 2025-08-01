@@ -5,6 +5,9 @@ import { Button } from "@kobalte/core/button";
 import { TextField } from "@kobalte/core/text-field";
 import "./App.css";
 
+/**
+ * Defines the structure for a message object, including its ID, text content, and 2D coordinates.
+ */
 interface Message {
   id: number;
   text: string;
@@ -12,12 +15,22 @@ interface Message {
   y: number;
 }
 
+/**
+ * The main application component for the Primatif Comics app.
+ * Manages a draggable text element with persistent storage via a Tauri backend.
+ * It demonstrates the Responsive UI / Authoritative Backend architectural pattern.
+ */
 function App() {
   const [message, setMessage] = createSignal<Message>({ id: 0, text: "Hello World!", x: 50, y: 50 });
   const [isDragging, setIsDragging] = createSignal(false);
 
   let startX: number, startY: number;
 
+  /**
+   * Lifecycle hook that runs after the component is mounted.
+   * It attaches the console for unified logging and fetches the latest message from the backend.
+   * If no message exists, the local state retains its initial default values until explicitly saved.
+   */
   onMount(async () => {
     const detach = await attachConsole();
     // You can detach the console later if needed
@@ -35,12 +48,23 @@ function App() {
     }
   });
 
+  /**
+   * Handles the mouse down event on the draggable element.
+   * Initiates the dragging state and records the starting mouse position relative to the element.
+   * @param e The MouseEvent object.
+   */
   const onMouseDown = (e: MouseEvent) => {
     setIsDragging(true);
     startX = e.clientX - message().x;
     startY = e.clientY - message().y;
   };
 
+  /**
+   * Handles the mouse move event, updating the draggable element's position locally.
+   * This function is called frequently during dragging to provide a responsive UI.
+   * Backend updates are deferred until the 'Save' button is clicked.
+   * @param e The MouseEvent object.
+   */
   const onMouseMove = (e: MouseEvent) => {
     if (isDragging()) {
       const newX = e.clientX - startX;
@@ -50,16 +74,29 @@ function App() {
     }
   };
 
+  /**
+   * Handles the mouse up event, ending the dragging state.
+   * This function only updates the local state; it does not trigger a backend save.
+   */
   const onMouseUp = () => {
     setIsDragging(false);
     // No backend call here. Local state is updated by onMouseMove.
   };
 
+  /**
+   * Handles input changes for the text field, updating the message's text content locally.
+   * Backend updates are deferred until the 'Save' button is clicked.
+   * @param e The Event object from the input field.
+   */
   const onTextInput = (e: Event) => {
     const target = e.target as HTMLInputElement;
     setMessage(prev => ({ ...prev, text: target.value }));
   };
 
+  /**
+   * Handles the save action, persisting the current message's text and coordinates to the backend.
+   * After a successful save, it re-fetches the latest state from the backend to ensure data consistency.
+   */
   const onSave = async () => {
     const currentMessage = message();
     info(`Saving message: text=${currentMessage.text}, x=${currentMessage.x}, y=${currentMessage.y}`);
