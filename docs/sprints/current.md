@@ -74,29 +74,65 @@
 
 **Intent:** To build the user-facing part of the application and implement the core "Responsive UI / Authoritative Backend" pattern.
 
-- [ ] **UI and Styling Setup**:
-  - **Action**: Create the main `App.tsx` component. Install and configure `@kobalte/core` for UI primitives and Tailwind CSS for styling.
-  - **Reasoning**: This establishes the foundational tools for building a consistent, accessible, and well-styled user interface.
+- [x] **UI and Styling Setup**:
+  - **Action**: Created the main `App.tsx` component. Installed and configured `@kobalte/core` for UI primitives and Tailwind CSS for styling.
+  - **Notes**: Integrated `@kobalte/core/button` and `@kobalte/core/text-field` for improved UI components and accessibility. Refined Tailwind CSS classes for a more polished aesthetic, adhering to utility-first and tokenized styling principles.
+  - **Reasoning**: This established the foundational tools for building a consistent, accessible, and well-styled user interface.
 
-- [ ] **Implement the Draggable Element**:
-  - **Action**: Create a simple draggable UI element.
-    - **Real-time Loop (`onMouseMove`)**: The element's position must update in real-time using a local SolidJS signal (`createSignal`). **No backend calls should be made during this phase.**
-    - **Authoritative Loop (`onMouseUp`)**: The final position must be sent to the `update_message` Tauri command.
+- [x] **Implement the Draggable Element**:
+  - **Action**: Created a simple draggable UI element.
+    - **Real-time Loop (`onMouseMove`)**: The element's position updates in real-time using a local SolidJS signal (`createSignal`). No backend calls are made during this phase, ensuring a fluid user experience.
+    - **Authoritative Loop (`onSave` button)**: The final position and text are sent to the `update_message` Tauri command only when the user explicitly clicks a "Save Changes" button.
+  - **Notes**: **Deviation from initial plan**: The original plan for the "Authoritative Loop" was to send the final position on `onMouseUp`. However, the user requested an explicit "Save Changes" button to confirm updates to the backend. This provides more user control over persistence.
   - **Reasoning**: This is the tangible proof-of-concept for the application's most critical architectural pattern. It demonstrates the separation of the fluid user experience (local state) from the official data persistence (backend state), ensuring both performance and data integrity.
 
-- [ ] **Add Frontend Logging**:
+- [x] **Add Frontend Logging**:
   - **Action**:
-    - Add a `debug!` log in the `onMouseMove` handler to log the element's real-time coordinates.
-    - Add an `info!` log in the `onMouseUp` handler to log the final coordinates being sent to the backend.
+    - Added a `debug!` log in the `onMouseMove` handler to log the element's real-time coordinates.
+    - Added an `info!` log in the `onSave` handler to log the final coordinates and text being sent to the backend.
   - **Reasoning**: This verifies that the logging system is also capturing high-frequency events from the frontend (in debug mode) and key interaction events, providing a complete picture of the application's behavior.
 
-- [ ] **Acceptance Criteria for this Step**:
-  - The application must visibly demonstrate the responsive UI pattern.
-  - All four log messages (two from the backend, two from the frontend) must appear correctly in the console and the log file during development.
+- [x] **Acceptance Criteria for this Step** (Completed):
+  - The application visibly demonstrates the responsive UI pattern.
+  - All relevant log messages (from both frontend and backend) appear correctly in the console and the log file during development.
+  - The draggable element's position and text are persisted to the backend only upon explicit user confirmation via the "Save Changes" button.
 
 ---
 
-## Step 5: CI/CD Pipeline Automation
+## Step 5: Frontend Refactoring - Pixi.js Canvas Integration
+
+**Intent:** To refactor the existing draggable element to use Pixi.js for rendering, demonstrating integration with a canvas-based library and preparing for more complex graphical operations.
+
+- [ ] **Integrate Pixi.js**:
+  - **Action**: Install Pixi.js v8 and related types (`@pixi/app`, `@pixi/graphics`, `@pixi/text`, `@pixi/events`).
+  - **Reasoning**: Pixi.js provides a high-performance 2D rendering engine that is crucial for the comic panel creator's future graphical capabilities.
+
+- [ ] **Create `CanvasRenderer` Component**:
+  - **Action**: Develop a new SolidJS component (e.g., `src/components/CanvasRenderer.tsx`) that encapsulates the Pixi.js application.
+  - **Notes**: This component should be responsible for initializing the Pixi.js `Application`, managing its lifecycle, and providing a canvas element for rendering.
+  - **Reasoning**: Encapsulating the canvas logic in a separate component promotes modularity and reusability, aligning with our component architecture standards.
+
+- [ ] **Refactor Draggable Element to Pixi.js**:
+  - **Action**: Migrate the draggable text element from its current DOM-based implementation to be rendered within the Pixi.js canvas.
+    - **Pixi.js Graphics**: Use `PIXI.Graphics` to draw the background shape of the draggable element.
+    - **Pixi.js Text**: Use `PIXI.Text` to render the message text.
+    - **Pixi.js Interaction**: Implement dragging logic using Pixi.js's event system (`pointerdown`, `pointermove`, `pointerup`).
+  - **Reasoning**: This refactoring serves as a critical integration test, ensuring that our responsive UI pattern can be effectively applied to canvas-based elements. It also validates the performance and interaction capabilities of Pixi.js within the Tauri environment.
+
+- [ ] **Update `App.tsx` to use `CanvasRenderer`**:
+  - **Action**: Modify `App.tsx` to import and render the new `CanvasRenderer` component. Pass the message data and save handler as props to the `CanvasRenderer`.
+  - **Reasoning**: This maintains `App.tsx` as a high-level orchestrator, delegating rendering concerns to specialized components.
+
+- [ ] **Acceptance Criteria for this Step**:
+  - The draggable text element is rendered on a Pixi.js canvas.
+  - Dragging the element updates its position smoothly within the canvas.
+  - The "Save Changes" button still correctly persists the text and coordinates to the backend.
+  - No new TypeScript errors are introduced.
+  - The application's overall performance remains fluid.
+
+---
+
+## Step 6: CI/CD Pipeline Automation
 
 **Intent:** To automate the process of testing, building, and releasing the application, ensuring that every change is validated and that releases are consistent and professional.
 
