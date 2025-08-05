@@ -101,22 +101,23 @@
 
 ## Step 5: Frontend Refactoring - Pixi.js Canvas Integration
 
-**Intent:** To refactor the existing draggable element to use Pixi.js for rendering, demonstrating integration with a canvas-based library and preparing for more complex graphical operations.
+**Intent:** To refactor the existing draggable element to use Pixi.js for rendering, demonstrating integration with a canvas-based library and preparing for more complex graphical operations. This step will prioritize modularity and leverage `solid-pixi` for a SolidJS-idiomatic approach.
 
-- [ ] **Integrate Pixi.js**:
-  - **Action**: Install Pixi.js v8 and related types (`@pixi/app`, `@pixi/graphics`, `@pixi/text`, `@pixi/events`).
-  - **Reasoning**: Pixi.js provides a high-performance 2D rendering engine that is crucial for the comic panel creator's future graphical capabilities.
+- [ ] **Integrate Pixi.js with `solid-pixi`**:
+  - **Action**: Install `solid-pixi` and Pixi.js v8. Leverage `solid-pixi` to create PixiJS applications using JSX and SolidJS's reactive Signals.
+  - **Notes**: PixiJS v8's single-package structure and "extensions" system will be utilized for modularity and bundle size control. `Container` is now the base class for all PixiJS objects.
+  - **Reasoning**: `solid-pixi` provides a performant and idiomatic way to integrate PixiJS with SolidJS, aligning with our component-based architecture and leveraging SolidJS's fine-grained reactivity for efficient updates.
 
 - [ ] **Create `CanvasRenderer` Component**:
-  - **Action**: Develop a new SolidJS component (e.g., `src/components/CanvasRenderer.tsx`) that encapsulates the Pixi.js application.
-  - **Notes**: This component should be responsible for initializing the Pixi.js `Application`, managing its lifecycle, and providing a canvas element for rendering.
-  - **Reasoning**: Encapsulating the canvas logic in a separate component promotes modularity and reusability, aligning with our component architecture standards.
+  - **Action**: Develop a new SolidJS component (e.g., `src/components/CanvasRenderer.tsx`) that encapsulates the Pixi.js application using `solid-pixi`'s `<Application>` component.
+  - **Notes**: This component will manage the Pixi.js lifecycle and provide the canvas element.
+  - **Reasoning**: Encapsulating the canvas logic promotes modularity and reusability, aligning with our component architecture standards.
 
 - [ ] **Refactor Draggable Element to Pixi.js**:
-  - **Action**: Migrate the draggable text element from its current DOM-based implementation to be rendered within the Pixi.js canvas.
-    - **Pixi.js Graphics**: Use `PIXI.Graphics` to draw the background shape of the draggable element.
-    - **Pixi.js Text**: Use `PIXI.Text` to render the message text.
-    - **Pixi.js Interaction**: Implement dragging logic using Pixi.js's event system (`pointerdown`, `pointermove`, `pointerup`).
+  - **Action**: Migrate the draggable text element from its current DOM-based implementation to be rendered within the Pixi.js canvas using `solid-pixi` components.
+    - **Pixi.js Graphics**: Use `<Graphics>` to draw the background shape of the draggable element.
+    - **Pixi.js Text**: Use `<Text>` to render the message text.
+    - **Pixi.js Interaction**: Implement dragging logic using Pixi.js's event system via `solid-pixi`'s event handlers (e.g., `onPointerdown`, `onPointermove`, `onPointerup`).
   - **Reasoning**: This refactoring serves as a critical integration test, ensuring that our responsive UI pattern can be effectively applied to canvas-based elements. It also validates the performance and interaction capabilities of Pixi.js within the Tauri environment.
 
 - [ ] **Update `App.tsx` to use `CanvasRenderer`**:
@@ -124,7 +125,7 @@
   - **Reasoning**: This maintains `App.tsx` as a high-level orchestrator, delegating rendering concerns to specialized components.
 
 - [ ] **Acceptance Criteria for this Step**:
-  - The draggable text element is rendered on a Pixi.js canvas.
+  - The draggable text element is rendered on a Pixi.js canvas via `solid-pixi`.
   - Dragging the element updates its position smoothly within the canvas.
   - The "Save Changes" button still correctly persists the text and coordinates to the backend.
   - No new TypeScript errors are introduced.

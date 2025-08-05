@@ -38,7 +38,12 @@ These standards extend `/.gemini/standards/GEMINI.md` with specific conventions 
 - **Summary**: Focuses on error boundaries and graceful degradation for a robust user experience.
 - **For detailed explanation**: Refer to `/.gemini/standards/frontend_specific/details/error_handling.md`.
 
-## 6. Anti-Patterns to Avoid
+## 6. PixiJS Integration
+
+- **Summary**: Guidelines for integrating PixiJS with SolidJS using `solid-pixi`, emphasizing modularity and performance.
+- **For detailed explanation**: Refer to `/.gemini/standards/frontend_specific/details/pixi_js_integration.md`.
+
+## 7. Anti-Patterns to Avoid
 
 - **Summary**: Lists common anti-patterns like monolithic components, prop drilling, and inline styles.
 - **For detailed explanation**: Refer to `/.gemini/standards/frontend_specific/details/anti_patterns.md`.
