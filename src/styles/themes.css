@@ -1,0 +1,116 @@
+/**
+ * PRIMATIF COMICS THEME SYSTEM
+ * 
+ * This file defines CSS custom properties for light and dark themes.
+ * These variables are automatically used by the semantic color tokens in tailwind.config.js
+ * 
+ * USAGE:
+ * - Add 'dark' class to <html> or <body> to switch to dark theme
+ * - Use semantic colors in components: bg-bg-primary, text-text-primary, etc.
+ * - Theme switching is handled by adding/removing the 'dark' class
+ */
+
+/* ============================================================================
+   LIGHT THEME (Default)
+   ============================================================================ */
+
+:root {
+  /* Background colors */
+  --color-bg-primary: 255 255 255;        /* Pure white */
+  --color-bg-secondary: 248 250 252;      /* Very light gray */
+  --color-bg-tertiary: 71 85 105;         /* Dark charcoal for contrast */
+
+  /* Text colors */
+  --color-text-primary: 15 23 42;         /* Near black */
+  --color-text-secondary: 71 85 105;      /* Medium gray */
+  --color-text-tertiary: 148 163 184;     /* Light gray */
+
+  /* Border colors */
+  --color-border-primary: 226 232 240;    /* Light border */
+  --color-border-secondary: 203 213 225;  /* Slightly darker border */
+
+  /* Canvas colors */
+  --color-canvas-bg: 248 250 252;         /* Light workspace background */
+  --color-canvas-page: 255 255 255;       /* White page background */
+
+  /* Status background colors */
+  --color-success-bg: 240 253 244;        /* Light green */
+  --color-warning-bg: 255 251 235;        /* Light yellow */
+  --color-error-bg: 254 242 242;          /* Light red */
+  --color-info-bg: 239 246 255;           /* Light blue */
+}
+
+/* ============================================================================
+   DARK THEME
+   ============================================================================ */
+
+.dark {
+  /* Background colors */
+  --color-bg-primary: 15 23 42;           /* Dark slate */
+  --color-bg-secondary: 30 41 59;         /* Slightly lighter slate */
+  --color-bg-tertiary: 51 65 85;          /* Medium slate for contrast */
+
+  /* Text colors */
+  --color-text-primary: 248 250 252;      /* Near white */
+  --color-text-secondary: 203 213 225;    /* Light gray */
+  --color-text-tertiary: 148 163 184;     /* Medium gray */
+
+  /* Border colors */
+  --color-border-primary: 71 85 105;      /* Dark border */
+  --color-border-secondary: 51 65 85;     /* Darker border */
+
+  /* Canvas colors */
+  --color-canvas-bg: 30 41 59;            /* Dark workspace background */
+  --color-canvas-page: 15 23 42;          /* Dark page background */
+
+  /* Status background colors */
+  --color-success-bg: 20 83 45;           /* Dark green */
+  --color-warning-bg: 133 77 14;          /* Dark yellow */
+  --color-error-bg: 153 27 27;            /* Dark red */
+  --color-info-bg: 30 58 138;             /* Dark blue */
+}
+
+/* ============================================================================
+   THEME TRANSITION ANIMATIONS
+   ============================================================================ */
+
+/* Smooth transitions when switching themes */
+* {
+  transition: 
+    background-color 200ms ease-in-out,
+    border-color 200ms ease-in-out,
+    color 200ms ease-in-out;
+}
+
+/* Disable transitions on theme change to prevent flash */
+.theme-transition-disable * {
+  transition: none !important;
+}
+
+/* ============================================================================
+   UTILITY CLASSES FOR THEME SWITCHING
+   ============================================================================ */
+
+/* Force light theme regardless of parent */
+.force-light {
+  --color-bg-primary: 255 255 255;
+  --color-bg-secondary: 248 250 252;
+  --color-bg-tertiary: 71 85 105;
+  --color-text-primary: 15 23 42;
+  --color-text-secondary: 71 85 105;
+  --color-text-tertiary: 148 163 184;
+  --color-border-primary: 226 232 240;
+  --color-border-secondary: 203 213 225;
+}
+
+/* Force dark theme regardless of parent */
+.force-dark {
+  --color-bg-primary: 15 23 42;
+  --color-bg-secondary: 30 41 59;
+  --color-bg-tertiary: 51 65 85;
+  --color-text-primary: 248 250 252;
+  --color-text-secondary: 203 213 225;
+  --color-text-tertiary: 148 163 184;
+  --color-border-primary: 71 85 105;
+  --color-border-secondary: 51 65 85;
+}
