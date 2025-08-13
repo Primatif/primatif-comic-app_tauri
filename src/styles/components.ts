@@ -13,9 +13,10 @@
 export const LAYOUT = {
   MAIN_CONTAINER: 'h-screen w-screen overflow-hidden bg-bg-secondary',
   THREE_COLUMN: 'flex h-full',
-  LEFT_SIDEBAR: 'w-sidebar-left bg-bg-tertiary text-text-primary flex flex-col border-r border-border-primary',
-  RIGHT_SIDEBAR: 'w-sidebar-right bg-bg-primary flex flex-col border-l border-border-primary',
-  CENTER_CANVAS: 'flex-1 bg-canvas-bg flex flex-col',
+  // Width is now defined directly in the components
+  LEFT_SIDEBAR: 'bg-bg-tertiary text-text-primary flex flex-col border-r border-border-primary p-2 flex-shrink-0',
+  RIGHT_SIDEBAR: 'bg-bg-primary flex flex-col border-l border-border-primary p-2 flex-shrink-0',
+  CENTER_CANVAS: 'flex-1 bg-canvas-bg flex flex-col p-2',
   SIDEBAR_HEADER: 'p-4 border-b border-border-secondary',
   SIDEBAR_CONTENT: 'flex-1 p-4 overflow-y-auto',
   CANVAS_TOOLBAR: 'bg-bg-primary border-b border-border-primary p-3',

@@ -63,15 +63,6 @@ const config = {
         'info-bg': 'rgb(var(--color-info-bg) / <alpha-value>)',
       },
       
-      // Custom spacing for comic layout
-      spacing: {
-        'sidebar-left': '18rem',   // 288px
-        'sidebar-right': '24rem',  // 384px
-        'page-width': '37.5rem',   // 600px
-        'page-height': '56.25rem', // 900px
-        'safe-margin': '1.5rem',   // 24px
-      },
-      
       // Primatif Typography
       fontFamily: {
         'heading': ['Bebas Neue', 'Arial Black', 'sans-serif'],

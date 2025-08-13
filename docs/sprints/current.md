@@ -133,6 +133,32 @@
 
 ---
 
+## Step 5.5: Database Migration with `sqlx`
+
+**Intent:** To replace the manual schema initialization with a robust, version-controlled migration system using `sqlx` and `sqlx-cli`, ensuring database schema evolution is managed systematically, and to clean up any remnants of the old system.
+
+- [ ] **Add `sqlx` Dependency and Remove `rusqlite`**:
+  - **Action**: Modify `src-tauri/Cargo.toml` to include `sqlx` as a dependency and remove `rusqlite`.
+  - **Reasoning**: `sqlx` provides compile-time checked queries and a more robust data access layer, which is crucial for application stability and maintainability.
+
+- [ ] **Refactor `DatabaseManager` to use `sqlx`**:
+  - **Action**: Update `src-tauri/src/database/mod.rs` to use `sqlx` for database connection management and operations. This will involve changing `rusqlite::Connection` to `sqlx::SqlitePool` or similar, and adapting methods to `sqlx`'s asynchronous nature.
+  - **Reasoning**: This aligns the database management with the chosen `sqlx` framework, leveraging its features for connection pooling and asynchronous operations.
+
+- [ ] **Initialize `sqlx-cli` and Create Initial Migration**:
+  - **Action**: Install `sqlx-cli` and use it to create the initial migration for the `messages` table, replacing the existing `src-tauri/src/database/schema.sql`.
+  - **Reasoning**: `sqlx-cli` provides a standardized way to manage database schema changes, ensuring that all schema modifications are version-controlled and applied consistently across different environments.
+
+- [ ] **Update Tauri Commands to use `sqlx`**:
+  - **Action**: Modify `src-tauri/src/commands.rs` and any other relevant files to use `sqlx` for database interactions within the Tauri commands.
+  - **Reasoning**: This completes the transition to `sqlx` for all database operations, ensuring that the application fully benefits from `sqlx`'s compile-time checks and robust features.
+
+- [ ] **Cleanup**:
+  - **Action**: Remove `src-tauri/src/database/schema.sql` as its functionality is replaced by `sqlx` migrations. Review `src-tauri/src/database/mod.rs` and `src-tauri/src/main.rs` for any remaining `rusqlite`-specific code or imports and remove them.
+  - **Reasoning**: This ensures the repository remains clean and organized, free of dead code or unused tools, and reflects the new `sqlx`-based database management approach.
+
+---
+
 ## Step 6: CI/CD Pipeline Automation
 
 **Intent:** To automate the process of testing, building, and releasing the application, ensuring that every change is validated and that releases are consistent and professional.
