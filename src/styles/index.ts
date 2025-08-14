@@ -18,4 +18,4 @@ export {
 } from './components';
 
 // Re-export theme utilities
-export { THEME_UTILS } from './theme-utils';
+export { THEME_UTILS } from './utils/theme-utils';

@@ -1,6 +1,7 @@
 import { Component, onCleanup, onMount } from 'solid-js';
 import { Application, Container, Graphics } from 'pixi.js';
 import { error } from '@tauri-apps/plugin-log';
+import { CheckeredBackground } from '../CheckeredBackground/CheckeredBackground';
 
 /**
  * Props for the WorkspaceRenderer component
@@ -10,8 +11,14 @@ interface WorkspaceRendererProps {
   width?: number;
   /** Optional fixed height for the workspace. If not provided, uses container height */
   height?: number;
-  /** Background color as a hex number (e.g., 0xFF0000 for red). Defaults to red */
+  /** Background color as a hex number (e.g., 0xFF0000 for red). Defaults to transparent for checkered background */
   backgroundColor?: number;
+  /** Size of checkered background squares in pixels. Defaults to 20 */
+  checkerSize?: number;
+  /** Light color for checkered background. Defaults to '#ffffff' */
+  checkerLightColor?: string;
+  /** Dark color for checkered background. Defaults to '#f0f0f0' */
+  checkerDarkColor?: string;
 }
 
 /**
@@ -76,7 +83,7 @@ export const WorkspaceRenderer: Component<WorkspaceRendererProps> = (props) => {
     }
     
     // Use v8 API - poly method with fill
-    graphics.poly(starPath).fill(0xFFFFFF); // White color
+    graphics.poly(starPath).fill('#E31937'); // Red color
     return graphics;
   };
   
@@ -106,9 +113,10 @@ export const WorkspaceRenderer: Component<WorkspaceRendererProps> = (props) => {
       // Create the Pixi Application
       pixiApp = new Application();
       
-      // Initialize with proper settings - remove resizeTo to handle manually
+      // Initialize with proper settings - use transparent background for checkered pattern
       await pixiApp.init({
-        background: props.backgroundColor || 0xFF0000,
+        background: props.backgroundColor || 0x000000, // Transparent or custom color
+        backgroundAlpha: props.backgroundColor ? 1 : 0, // Transparent if no background color specified
         width: appContainer.clientWidth || 800,
         height: appContainer.clientHeight || 600,
         antialias: true,
@@ -219,11 +227,17 @@ export const WorkspaceRenderer: Component<WorkspaceRendererProps> = (props) => {
         right: "0",
         bottom: "0",
         overflow: "hidden",
-        background: "#FF0000", // Fallback color
         "min-height": "200px" // Reduced minimum height
       }}
-      data-testid="canvas-container"
-    />
+      data-testid="workspace-container"
+    >
+      {/* Checkered background pattern for transparency indication */}
+      <CheckeredBackground 
+        squareSize={props.checkerSize}
+        lightColor={props.checkerLightColor}
+        darkColor={props.checkerDarkColor}
+      />
+    </div>
   );
 };
 

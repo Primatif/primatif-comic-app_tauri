@@ -3,7 +3,7 @@ import { ThreeColumnLayout } from '../../components/Layouts/ThreeColumnLayout';
 import { LeftColumn } from './LeftColumn';
 import { CenterColumn } from './CenterColumn';
 import { RightColumn } from './RightColumn';
-import { THEME_UTILS } from '../../styles/theme-utils';
+import { THEME_UTILS } from '../../styles/utils/theme-utils';
 
 /**
  * MainPage component for the Primatif Comics app.

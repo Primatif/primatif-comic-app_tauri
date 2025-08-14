@@ -10,7 +10,7 @@ export function CenterColumn() {
   return (
     <div class={MAIN_PAGE.CENTER_COLUMN_WIDTH}>
       <div class={`${LAYOUT.CANVAS_WORKSPACE} h-full`}>
-        <WorkspaceRenderer backgroundColor={0xFF0000} />
+        <WorkspaceRenderer />
       </div>
     </div>
   );

@@ -63,6 +63,13 @@ const config = {
         'info-bg': 'rgb(var(--color-info-bg) / <alpha-value>)',
       },
       
+      // Checkered Background Configuration
+      checkeredBackground: {
+        squareSize: '20px',
+        lightColor: '#ffffff',
+        darkColor: '#f0f0f0',
+      },
+      
       // Primatif Typography
       fontFamily: {
         'heading': ['Bebas Neue', 'Arial Black', 'sans-serif'],
