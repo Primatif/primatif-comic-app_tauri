@@ -1,22 +1,62 @@
 import { Component, onCleanup, onMount } from 'solid-js';
 import { Application, Container, Graphics } from 'pixi.js';
+import { error } from '@tauri-apps/plugin-log';
 
-interface CanvasRendererProps {
+/**
+ * Props for the WorkspaceRenderer component
+ */
+interface WorkspaceRendererProps {
+  /** Optional fixed width for the workspace. If not provided, uses container width */
   width?: number;
+  /** Optional fixed height for the workspace. If not provided, uses container height */
   height?: number;
+  /** Background color as a hex number (e.g., 0xFF0000 for red). Defaults to red */
   backgroundColor?: number;
 }
 
 /**
- * CanvasRenderer component that encapsulates Pixi.js application.
- * This component manages the Pixi.js lifecycle and provides the canvas element.
+ * WorkspaceRenderer - A SolidJS component that provides the main workspace for comic creation
+ * 
+ * This component creates and manages a PixiJS Application instance that serves as the primary
+ * workspace for comic creation and editing. It handles the complete lifecycle of the PixiJS 
+ * application including initialization, rendering, resizing, and cleanup.
+ * 
+ * @component
+ * @example
+ * ```tsx
+ * <WorkspaceRenderer backgroundColor={0xFF0000} />
+ * ```
+ * 
+ * @features
+ * - Responsive workspace that fills parent container
+ * - Automatic resize handling using ResizeObserver
+ * - PixiJS-powered rendering engine for comic elements
+ * - Proper resource cleanup on component unmount
+ * - PixiJS v8 API compliance (no deprecation warnings)
+ * - Tauri native logging integration
+ * 
+ * @performance
+ * - Uses PixiJS ticker for smooth 60fps rendering
+ * - Efficient ResizeObserver for responsive behavior
+ * - Proper memory management with cleanup handlers
  */
-export const CanvasRenderer: Component<CanvasRendererProps> = (props) => {
+export const WorkspaceRenderer: Component<WorkspaceRendererProps> = (props) => {
+  /** Reference to the DOM container element that holds the PixiJS canvas */
   let appContainer: HTMLDivElement | undefined;
+  /** The main PixiJS Application instance */
   let pixiApp: Application | undefined;
+  /** Container that holds the animated star graphics */
   let starContainer: Container | undefined;
   
-  // Draw a star shape using PixiJS v8 API
+  /**
+   * Creates a 5-pointed star shape using PixiJS v8 Graphics API
+   * 
+   * @returns {Graphics} A Graphics object containing the white star shape
+   * 
+   * @internal
+   * Uses the new PixiJS v8 poly() and fill() methods instead of deprecated
+   * beginFill/endFill to avoid console warnings
+   */
   const createStar = () => {
     const graphics = new Graphics();
     
@@ -40,9 +80,25 @@ export const CanvasRenderer: Component<CanvasRendererProps> = (props) => {
     return graphics;
   };
   
+  /**
+   * SolidJS lifecycle hook that initializes the PixiJS application
+   * 
+   * This async function handles the complete setup of the PixiJS environment:
+   * - Creates and initializes the PixiJS Application with proper settings
+   * - Sets up the canvas element with responsive styling
+   * - Creates the animated star graphics and positions it in the center
+   * - Configures the animation ticker for smooth rotation
+   * - Sets up ResizeObserver for responsive canvas behavior
+   * - Registers cleanup handlers for proper resource disposal
+   * 
+   * @async
+   * @returns {Promise<void>}
+   * 
+   * @throws Will log errors if PixiJS initialization fails
+   */
   onMount(async () => {
     if (!appContainer) {
-      console.error('CanvasRenderer: appContainer ref is not set');
+      await error('WorkspaceRenderer: appContainer ref is not set');
       return;
     }
 
@@ -77,7 +133,10 @@ export const CanvasRenderer: Component<CanvasRendererProps> = (props) => {
       const star = createStar();
       starContainer.addChild(star);
       
-      // Position in center
+      /**
+       * Centers the star container in the middle of the canvas
+       * @internal
+       */
       const centerStar = () => {
         if (pixiApp && pixiApp.screen && starContainer) {
           starContainer.position.set(
@@ -89,34 +148,44 @@ export const CanvasRenderer: Component<CanvasRendererProps> = (props) => {
       
       centerStar();
       
-      // Add to stage
+      // Add the star container to the main stage
       pixiApp.stage.addChild(starContainer);
       
-      // Set up animation ticker
+      /**
+       * Animation function that rotates the star continuously
+       * Called by PixiJS ticker for smooth 60fps animation
+       * @internal
+       */
       const animateStar = () => {
         if (starContainer) {
-          starContainer.rotation += 0.02;
+          starContainer.rotation += 0.02; // ~1.15 degrees per frame at 60fps
         }
       };
       
-      // Add animation to ticker
+      // Register the animation function with PixiJS ticker
       pixiApp.ticker.add(animateStar);
       
-      // Handle window resize with proper canvas scaling
+      /**
+       * Handles canvas resize events by updating renderer dimensions and re-centering content
+       * @internal
+       */
       const handleResize = () => {
         if (pixiApp && appContainer) {
           const newWidth = appContainer.clientWidth;
           const newHeight = appContainer.clientHeight;
           
-          // Resize the renderer
+          // Update PixiJS renderer to match new container size
           pixiApp.renderer.resize(newWidth, newHeight);
           
-          // Re-center the star
+          // Re-center the star in the new dimensions
           centerStar();
         }
       };
       
-      // Use ResizeObserver for better resize handling
+      /**
+       * ResizeObserver provides efficient container size change detection
+       * More performant than window resize events for responsive behavior
+       */
       const resizeObserver = new ResizeObserver(() => {
         handleResize();
       });
@@ -132,8 +201,8 @@ export const CanvasRenderer: Component<CanvasRendererProps> = (props) => {
         }
       });
       
-    } catch (error) {
-      console.error('CanvasRenderer: Error initializing PixiJS', error);
+    } catch (err) {
+      await error(`WorkspaceRenderer: Error initializing PixiJS - ${err}`);
     }
   });
 
@@ -158,4 +227,4 @@ export const CanvasRenderer: Component<CanvasRendererProps> = (props) => {
   );
 };
 
-export default CanvasRenderer;
+export default WorkspaceRenderer;
