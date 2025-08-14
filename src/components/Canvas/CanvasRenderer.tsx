@@ -16,31 +16,27 @@ export const CanvasRenderer: Component<CanvasRendererProps> = (props) => {
   let pixiApp: Application | undefined;
   let starContainer: Container | undefined;
   
-  // Draw a star shape
+  // Draw a star shape using PixiJS v8 API
   const createStar = () => {
     const graphics = new Graphics();
-    graphics.beginFill(0xFFFFFF); // White color
     
     const starPoints = 5;
     const outerRadius = 50;
     const innerRadius = 25;
     const startAngle = -Math.PI / 2;
     
+    // Create star path
+    const starPath = [];
     for (let i = 0; i < starPoints * 2; i++) {
       const radius = i % 2 === 0 ? outerRadius : innerRadius;
       const pointAngle = startAngle + (i * Math.PI / starPoints);
       const x = radius * Math.cos(pointAngle);
       const y = radius * Math.sin(pointAngle);
-      
-      if (i === 0) {
-        graphics.moveTo(x, y);
-      } else {
-        graphics.lineTo(x, y);
-      }
+      starPath.push(x, y);
     }
     
-    graphics.closePath();
-    graphics.endFill();
+    // Use v8 API - poly method with fill
+    graphics.poly(starPath).fill(0xFFFFFF); // White color
     return graphics;
   };
   
@@ -50,20 +46,15 @@ export const CanvasRenderer: Component<CanvasRendererProps> = (props) => {
       return;
     }
 
-    // Log for debugging
-    console.log('CanvasRenderer: Container dimensions', {
-      width: appContainer.clientWidth,
-      height: appContainer.clientHeight
-    });
-
     try {
       // Create the Pixi Application
       pixiApp = new Application();
       
-      // Initialize with proper settings
+      // Initialize with proper settings - remove resizeTo to handle manually
       await pixiApp.init({
         background: props.backgroundColor || 0xFF0000,
-        resizeTo: appContainer,
+        width: appContainer.clientWidth || 800,
+        height: appContainer.clientHeight || 600,
         antialias: true,
         autoDensity: true,
         resolution: window.devicePixelRatio || 1
@@ -74,10 +65,11 @@ export const CanvasRenderer: Component<CanvasRendererProps> = (props) => {
         pixiApp.canvas.style.display = 'block';
         pixiApp.canvas.style.width = '100%';
         pixiApp.canvas.style.height = '100%';
+        pixiApp.canvas.style.maxWidth = '100%';
+        pixiApp.canvas.style.maxHeight = '100%';
         appContainer.appendChild(pixiApp.canvas);
-        
-        console.log('CanvasRenderer: Canvas added to DOM');
       }
+      
       // Create a container for the star
       starContainer = new Container();
       
@@ -86,12 +78,16 @@ export const CanvasRenderer: Component<CanvasRendererProps> = (props) => {
       starContainer.addChild(star);
       
       // Position in center
-      if (pixiApp.screen) {
-        starContainer.position.set(
-          pixiApp.screen.width / 2,
-          pixiApp.screen.height / 2
-        );
-      }
+      const centerStar = () => {
+        if (pixiApp && pixiApp.screen && starContainer) {
+          starContainer.position.set(
+            pixiApp.screen.width / 2,
+            pixiApp.screen.height / 2
+          );
+        }
+      };
+      
+      centerStar();
       
       // Add to stage
       pixiApp.stage.addChild(starContainer);
@@ -106,29 +102,36 @@ export const CanvasRenderer: Component<CanvasRendererProps> = (props) => {
       // Add animation to ticker
       pixiApp.ticker.add(animateStar);
       
-      // Handle window resize
+      // Handle window resize with proper canvas scaling
       const handleResize = () => {
-        if (pixiApp && pixiApp.screen && starContainer) {
-          starContainer.position.set(
-            pixiApp.screen.width / 2,
-            pixiApp.screen.height / 2
-          );
+        if (pixiApp && appContainer) {
+          const newWidth = appContainer.clientWidth;
+          const newHeight = appContainer.clientHeight;
+          
+          // Resize the renderer
+          pixiApp.renderer.resize(newWidth, newHeight);
+          
+          // Re-center the star
+          centerStar();
         }
       };
       
-      window.addEventListener('resize', handleResize);
-      handleResize(); // Force initial positioning
+      // Use ResizeObserver for better resize handling
+      const resizeObserver = new ResizeObserver(() => {
+        handleResize();
+      });
       
-      // Set up cleanup
+      resizeObserver.observe(appContainer);
+      
+      // Set up cleanup properly within onMount
       onCleanup(() => {
-        window.removeEventListener('resize', handleResize);
+        resizeObserver.disconnect();
         if (pixiApp) {
           pixiApp.ticker.remove(animateStar);
           pixiApp.destroy(true, { children: true, texture: true });
         }
       });
       
-      console.log('CanvasRenderer: Star animation set up');
     } catch (error) {
       console.error('CanvasRenderer: Error initializing PixiJS', error);
     }
@@ -140,11 +143,15 @@ export const CanvasRenderer: Component<CanvasRendererProps> = (props) => {
       ref={appContainer} 
       style={{
         width: "100%", 
-        height: "100%",
-        position: "relative",
+        height: "100%", // Respect parent height from layout system
+        position: "absolute", // Use absolute positioning to fill container
+        top: "0",
+        left: "0",
+        right: "0",
+        bottom: "0",
         overflow: "hidden",
         background: "#FF0000", // Fallback color
-        "min-height": "300px" // Using hyphenated style name for TypeScript
+        "min-height": "200px" // Reduced minimum height
       }}
       data-testid="canvas-container"
     />
