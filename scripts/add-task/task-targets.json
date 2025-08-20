@@ -1,0 +1,6 @@
+{
+  "targets": {
+    "current": "docs/sprints/current.md",
+    "backlog": "docs/sprints/backlog.md"
+  }
+}
