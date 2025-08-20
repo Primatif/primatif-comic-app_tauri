@@ -32,6 +32,7 @@ bun run tauri build
 ## Documentation
 
 - [Project Scope](docs/PROJECT_SCOPE.md) - Detailed specifications
+- [Developer Scripts and Utilities](scripts/README.md) - CLI tools for workflow
 
 ## License
 

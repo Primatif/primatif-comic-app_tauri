@@ -13,7 +13,11 @@
     "tauri:build": "tauri build",
     "format": "prettier --write .",
     "lint:md:fix": "markdownlint-cli2 --fix",
-    "test": "bun test"
+    "test": "bun test",
+    "task:add": "node scripts/add-task/index.js",
+    "task:add:current": "node scripts/add-task/index.js --target current",
+    "task:add:backlog": "node scripts/add-task/index.js --target backlog",
+    "task:add:dry": "node scripts/add-task/index.js --dry"
   },
   "license": "PolyForm Strict License 1.0.0",
   "dependencies": {
