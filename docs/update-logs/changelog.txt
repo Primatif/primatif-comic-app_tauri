@@ -1,3 +1,5 @@
+2025-08-21 20:00 | CI/CD & Tooling & Docs | Implemented composable CI/CD workflows with shared setup action and reusable QA workflow. Integrated Semantic Release for automated versioning and GitHub releases. Added ESLint for frontend linting. Centralized QA scripts into a single command. Re-added backlog tasks using the task management script.
+
 2025-08-19 22:26 | Docs & Tooling & Feature | Updated sprint documentation to include new task management workflow and detailed TIFF handling spikes. Added new utility scripts for task management. Updated package.json and README.md for general maintenance.
 
 2025-08-01 00:00 | Frontend & Docs & Styling & Gemini | Implemented explicit save functionality for draggable element, improved styling with Kobalte components and Tailwind, resolved styling issues related to Tailwind and Vite configuration, and corrected Kobalte TextField component usage. Added comprehensive TSDoc documentation to frontend files and reviewed Rust backend documentation. Updated sprint plan to include Pixi.js integration and spent time refining Gemini context system.
