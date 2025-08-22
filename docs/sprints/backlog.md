@@ -43,3 +43,14 @@ title: "Backlog"
   - Older log files are automatically deleted to adhere to the retention limit.
 - **Links**:
 - **Notes**:
+
+### Semantic Versioning and Automated Releases - `18742f0f-8572-44a2-9bfc-3dfdfe231234`
+
+- **Description**: Wire up semantic-release so `main` builds produce semantic tags and changelogs. Expose `nextRelease.version` to downstream jobs via `$GITHUB_OUTPUT`, and update the `tauri-action` job to use that version for tag and release name. Add appropriate permissions for contents and PRs.
+- **Acceptance Criteria**:
+  - `semantic-release` runs on `main` and publishes a release with a semver tag (e.g., `v1.2.3`).
+  - The workflow exports the new version to a job output and uses it in the Tauri release step.
+  - Changelog is generated and committed or attached to the release per our chosen strategy.
+  - Documentation in `docs/guides/ci_cd_workflows.md` updated to include semantic versioning details.
+- **Links**:
+- **Notes**:

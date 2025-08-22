@@ -1,6 +1,5 @@
 ---
 title: "Current Sprint: CI/CD Pipeline and Release Automation"
-created_date: 2025-08-19
 ---
 
 ## Current Sprint: CI/CD Pipeline and Release Automation
@@ -13,9 +12,10 @@ created_date: 2025-08-19
 
 ### CI/CD Pipeline Automation - `a1b2c3d4-e5f6-7890-1234-567890abcdef`
 
-- **Description**: Refactor CI/CD into a composable architecture, aligning with the pipeline diagram in `Screenshot 2025-08-21 at 6.41.09 PM.png`. Create a central, reusable QA workflow that both `dev` and `main` workflows call. Keep performance testing, Selenium, and dev-environment deploys explicitly out-of-scope for this sprint (future work).
+- **Description**: Refactor CI/CD into a composable architecture, aligning with the pipeline diagram in `docs/guides/images/github-workflow-diagram.png`. Create a central, reusable QA workflow that both `dev` and `main` workflows call. Keep performance testing, Selenium, and dev-environment deploys explicitly out-of-scope for this sprint (future work).
   
-  - **Reusable QA Workflow (`github-workflow-diagram.png`)**: A workflow triggered via `workflow_call` that encapsulates all verification logic:
+  <!-- Diagram reference moved to docs/guides/images/github-workflow-diagram.png -->
+  - **Reusable QA Workflow (`reusable-qa.yml`)**: A workflow triggered via `workflow_call` that encapsulates all verification logic:
     - Test Scripts: integration tests and unit tests.
     - Quality Assurance Scripts: circular dependency checks, unused files/constants/functions, security scan.
     - Rust checks: clippy and rustfmt; Frontend checks: formatting, markdown lint.
@@ -23,7 +23,7 @@ created_date: 2025-08-19
 
   - **Shared Setup Composite Action (`.github/actions/setup-environment/`)**: One action that standardizes checkout, Node/Bun setup, Rust toolchain, and caching. Used by the reusable QA workflow and any build jobs.
 
-  - **Main Workflow (`main-branch.yml`)**: Calls `reusable-qa.yml` first. On success: Version++, Build, Release, Store (publish artifacts to GitHub Releases via `tauri-apps/tauri-action` with a matrix for `macos-latest` and `ubuntu-latest`).
+  - **Main Workflow (`main-branch.yml`)**: Calls `reusable-qa.yml` first. On success: Version++, Build, Release, Store (publish artifacts to GitHub Releases via `tauri-apps/tauri-action` on `macos-latest`, producing a dmg bundle).
 
   - **Dev Workflow (`dev-branch.yml`)**: Calls `reusable-qa.yml` on pushes to `dev` and on manual dispatch. On success: perform build checks and upload build artifacts. Performance/Selenium/Dev-deploy are intentionally deferred.
 
@@ -31,10 +31,12 @@ created_date: 2025-08-19
   - `.github/workflows/reusable-qa.yml` exists and is invokable via `workflow_call`, running tests and QA checks listed above and uploading a unified summary artifact.
   - `.github/actions/setup-environment/action.yml` exists and is used by the reusable workflow and by build jobs.
   - `.github/workflows/dev-branch.yml` calls `./.github/workflows/reusable-qa.yml` and, after QA passes, performs build checks. It triggers on pushes to `dev` and supports manual dispatch. Caching for Node/Bun and Cargo is enabled.
-  - `.github/workflows/main-branch.yml` calls the reusable QA workflow and, after QA passes, bumps version, builds with a matrix for `macos-latest` and `ubuntu-latest` using `tauri-apps/tauri-action`, creates a GitHub Release, and uploads signed bundles.
+  - `.github/workflows/main-branch.yml` calls the reusable QA workflow and, after QA passes, builds a macOS dmg using `tauri-apps/tauri-action`, creates a GitHub Release, and uploads the dmg bundle.
   - The plan explicitly excludes performance testing, Selenium, and dev-environment deployment for this sprint.
 
-- **Links**: See the pipeline diagram: `Screenshot 2025-08-21 at 6.41.09 PM.png`.
+- **Links**:
+  - CI/CD Guide: `docs/guides/ci_cd_workflows.md`
+  - Pipeline diagram: `docs/guides/images/github-workflow-diagram.png`
 - **Notes**: This decomposition removes duplication between `dev` and `main`, keeps QA logic in one place, and makes future extensions (e.g., performance or Selenium stages) easy to add as additional reusable workflows.
 
 ### Spike: Backend TIFF Data Handling & Saving (Rust) - `0a9f5838-a6f2-4aad-9f23-12e8dc3d0aea`
