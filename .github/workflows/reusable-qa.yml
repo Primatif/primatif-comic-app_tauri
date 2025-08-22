@@ -1,0 +1,37 @@
+name: Reusable QA Workflow
+on:
+  workflow_call:
+    outputs:
+      qa-summary:
+        description: "Summary of QA checks"
+        value: ${{ jobs.run-qa.outputs.qa-summary }}
+
+jobs:
+  run-qa:
+    runs-on: ubuntu-latest
+    outputs:
+      qa-summary: ${{ steps.generate-summary.outputs.summary }}
+    steps:
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+
+      - name: Run Bun Install
+        run: bun install
+
+      - name: Run All QA Checks
+        run: bun run qa:all
+
+      # Placeholder for other QA checks (circular dependencies, unused files, security scan)
+      # These will be added as separate steps or scripts later.
+
+      - name: Generate QA Summary
+        id: generate-summary
+        run: |
+          echo "QA checks completed successfully." >> qa_summary.txt
+          echo "summary=$(cat qa_summary.txt)" >> $GITHUB_OUTPUT
+
+      - name: Upload QA Summary Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-summary
+          path: qa_summary.txt

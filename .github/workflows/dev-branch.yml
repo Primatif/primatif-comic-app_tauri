@@ -1,71 +1,25 @@
 name: Dev Branch CI
 
-on: 
+on:
   push:
     branches:
-      - development
+      - dev
   workflow_dispatch:
 
-env:
-  RUST_TOOLCHAIN: stable
-  NODE_VERSION: 20
-
 jobs:
-  build-and-test:
+  call-qa-workflow:
+    uses: ./.github/workflows/reusable-qa.yml
+    secrets: inherit
+
+  build-checks:
+    needs: call-qa-workflow
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - name: Install Bun
-        uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-
-      - name: Install Frontend Dependencies
+      - name: Run Bun Install
         run: bun install
-
-      - name: Setup Rust Toolchain
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          toolchain: ${{ env.RUST_TOOLCHAIN }}
-          components: clippy, rustfmt
-
-      - name: Cache Cargo Registry
-        uses: actions/cache@v4
-        with:
-          path: ~/.cargo/registry
-          key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
-
-      - name: Cache Cargo Index
-        uses: actions/cache@v4
-        with:
-          path: ~/.cargo/git
-          key: ${{ runner.os }}-cargo-index-${{ hashFiles('**/Cargo.lock') }}
-
-      - name: Cache Cargo Build
-        uses: actions/cache@v4
-        with:
-          path: target
-          key: ${{ runner.os }}-cargo-build-target-${{ hashFiles('**/Cargo.lock') }}
-
-      - name: Run Frontend Lint and Format Check
-        run: bun run format && bun run lint:md:fix --check
-
-      - name: Run Rust Clippy
-        run: cargo clippy --workspace -- -D warnings
-
-      - name: Run Rust Format Check
-        run: cargo fmt --all --check
-
-      - name: Run Frontend Tests
-        run: bun test
 
       - name: Build Frontend (Vite)
         run: bun run build
