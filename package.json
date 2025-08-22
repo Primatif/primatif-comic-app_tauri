@@ -20,7 +20,7 @@
     "task:add:backlog": "node scripts/add-task/index.js --target backlog",
     "task:add:dry": "node scripts/add-task/index.js --dry",
     "release": "semantic-release",
-    "qa:all": "bun test && cd src-tauri && cargo test && cargo clippy -- -D warnings && cargo fmt -- --check && bun run frontend:lint"
+    "qa:all": "bun test && bun run frontend:lint && (cd src-tauri && cargo test && cargo clippy -- -D warnings && cargo fmt -- --check)"
   },
   "license": "PolyForm Strict License 1.0.0",
   "dependencies": {

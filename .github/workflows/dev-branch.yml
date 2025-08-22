@@ -13,7 +13,7 @@ jobs:
 
   build-checks:
     needs: call-qa-workflow
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Setup Environment
         uses: ./.github/actions/setup-environment
@@ -25,4 +25,4 @@ jobs:
         run: bun run build
 
       - name: Build Tauri Application (Dry Run)
-        run: bun run tauri build --bundles none --debug
+        run: bun run tauri build --bundles dmg --debug

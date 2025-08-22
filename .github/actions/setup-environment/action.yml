@@ -19,7 +19,6 @@ runs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ inputs.node-version }}
-        cache: 'bun' # Use bun for caching node_modules
 
     - name: Setup Bun
       uses: oven-sh/setup-bun@v1

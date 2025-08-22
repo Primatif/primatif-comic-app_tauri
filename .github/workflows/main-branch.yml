@@ -10,27 +10,29 @@ jobs:
     uses: ./.github/workflows/reusable-qa.yml
     secrets: inherit
 
-  run-semantic-release:
-    needs: call-qa-workflow
-    runs-on: ubuntu-latest
-    outputs:
-      new_release_version: ${{ steps.semantic_release.outputs.new_release_version }}
-    steps:
-      - name: Setup Environment
-        uses: ./.github/actions/setup-environment
-
-      - name: Install Bun
-        run: bun install
-
-      - name: Run Semantic Release
-        id: semantic_release
-        run: bun run release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # run-semantic-release:
+  #   needs: call-qa-workflow
+  #   runs-on: ubuntu-latest
+  #   outputs:
+  #     new_release_version: ${{ steps.semantic_release.outputs.new_release_version }}
+  #   steps:
+  #     - name: Setup Environment
+  #       uses: ./.github/actions/setup-environment
+  #
+  #     - name: Install Bun
+  #       run: bun install
+  #
+  #     - name: Run Semantic Release
+  #       id: semantic_release
+  #       run: bun run release
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   release:
-    needs: run-semantic-release
+    needs: call-qa-workflow
     runs-on: macos-latest
+    permissions:
+      contents: write
     steps:
       - name: Setup Environment
         uses: ./.github/actions/setup-environment
@@ -43,9 +45,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: app-v${{ needs.run-semantic-release.outputs.new_release_version }}
-          releaseName: 'App v${{ needs.run-semantic-release.outputs.new_release_version }}'
-          releaseBody: 'See the assets to download this version and install.'
+          tagName: app-build-${{ github.run_number }}
+          releaseName: 'App build ${{ github.run_number }}'
+          releaseBody: 'Automated macOS build. See the assets to download this version and install.'
           releaseDraft: false
           prerelease: false
-          args: --bundles 'dmg'
+          args: --bundles dmg
